@@ -2,7 +2,7 @@ import { Box, Button, MenuItem, TextField } from "@mui/material";
 import { Form, Formik } from "formik";
 import * as yup from "yup";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import Header from "../Components/Header";
+import Header from "./Header";
 import dayjs from "dayjs";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
@@ -17,6 +17,7 @@ const initialValues = {
   gender: "",
   // dob: dayjs(""),
   email: "",
+  password: "",
   contact: "",
   occupation: "",
   address: "",
@@ -33,6 +34,7 @@ const userSchema = yup.object().shape({
   gender: yup.string().oneOf(["male", "female"]).required("Required"),
   // dob: yup.string().required("required"),
   email: yup.string().email("invalid email").required("required"),
+  password: yup.string().required("required"),
   contact: yup
     .string()
     .matches(phoneRegExp, "Phone number is not valid")
@@ -97,38 +99,42 @@ const AddForm = ({ title }) => {
                 sx={{ gridColumn: "span 2" }}
               />
 
-              <TextField
-                fullWidth
-                variant="filled"
-                select
-                label="Select Parent"
-                name="parent"
-                onBlur={props.handleBlur}
-                onChange={props.handleChange}
-                value={props.values.parent}
-                error={!!props.touched.parent && !!props.errors.parent}
-                helperText={props.touched.parent && props.errors.parent}
-                sx={{ gridColumn: "span 2" }}
-              >
-                <MenuItem value="father">Father</MenuItem>
-              </TextField>
+              {title === "Student" ? (
+                <TextField
+                  fullWidth
+                  variant="filled"
+                  select
+                  label="Select Parent"
+                  name="parent"
+                  onBlur={props.handleBlur}
+                  onChange={props.handleChange}
+                  value={props.values.parent}
+                  error={!!props.touched.parent && !!props.errors.parent}
+                  helperText={props.touched.parent && props.errors.parent}
+                  sx={{ gridColumn: "span 2" }}
+                >
+                  <MenuItem value="father">Father</MenuItem>
+                </TextField>
+              ) : undefined}
 
-              <TextField
-                fullWidth
-                variant="filled"
-                select
-                label="Class"
-                name="class"
-                onBlur={props.handleBlur}
-                onChange={props.handleChange}
-                value={props.values.class}
-                error={!!props.touched.class && !!props.errors.class}
-                helperText={props.touched.class && props.errors.class}
-                sx={{ gridColumn: "span 2" }}
-              >
-                <MenuItem value="form1">Form 1</MenuItem>
-                <MenuItem value="form2">Form 1</MenuItem>
-              </TextField>
+              {title === "Student" ? (
+                <TextField
+                  fullWidth
+                  variant="filled"
+                  select
+                  label="Class"
+                  name="class"
+                  onBlur={props.handleBlur}
+                  onChange={props.handleChange}
+                  value={props.values.class}
+                  error={!!props.touched.class && !!props.errors.class}
+                  helperText={props.touched.class && props.errors.class}
+                  sx={{ gridColumn: "span 2" }}
+                >
+                  <MenuItem value="form1">Form 1</MenuItem>
+                  <MenuItem value="form2">Form 1</MenuItem>
+                </TextField>
+              ) : undefined}
 
               <TextField
                 fullWidth
@@ -147,30 +153,32 @@ const AddForm = ({ title }) => {
                 <MenuItem value="female">Female</MenuItem>
               </TextField>
 
-              <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <DatePicker
-                  disableFuture
-                  views={["day", "month", "year"]}
-                  sx={{ gridColumn: "span 2" }}
-                  fullWidth
-                  format="DD/MM/YYYY"
-                  variant="filled"
-                  label="Date of Birth"
-                  onBlur={props.handleBlur}
-                  onChange={(newValue) => {
-                    console.log(newValue);
-                    setDob(newValue);
-                  }}
-                  value={dob}
-                  name="dob"
-                  slotProps={{
-                    textField: {
-                      helperText: props.touched.dob && props.errors.dob,
-                      error: !!props.touched.dob && !!props.errors.dob,
-                    },
-                  }}
-                />
-              </LocalizationProvider>
+              {title === "Student" ? (
+                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                  <DatePicker
+                    disableFuture
+                    views={["day", "month", "year"]}
+                    sx={{ gridColumn: "span 2" }}
+                    fullWidth
+                    format="DD/MM/YYYY"
+                    variant="filled"
+                    label="Date of Birth"
+                    onBlur={props.handleBlur}
+                    onChange={(newValue) => {
+                      console.log(newValue);
+                      setDob(newValue);
+                    }}
+                    value={dob}
+                    name="dob"
+                    slotProps={{
+                      textField: {
+                        helperText: props.touched.dob && props.errors.dob,
+                        error: !!props.touched.dob && !!props.errors.dob,
+                      },
+                    }}
+                  />
+                </LocalizationProvider>
+              ) : undefined}
 
               <TextField
                 fullWidth
@@ -188,6 +196,19 @@ const AddForm = ({ title }) => {
               <TextField
                 fullWidth
                 variant="filled"
+                type="password"
+                label="Password"
+                onBlur={props.handleBlur}
+                onChange={props.handleChange}
+                value={props.values.password}
+                name="password"
+                error={!!props.touched.password && !!props.errors.password}
+                helperText={props.touched.password && props.errors.password}
+                sx={{ gridColumn: "span 4" }}
+              />
+              <TextField
+                fullWidth
+                variant="filled"
                 type="text"
                 label="Contact"
                 onBlur={props.handleBlur}
@@ -198,32 +219,42 @@ const AddForm = ({ title }) => {
                 helperText={props.touched.contact && props.errors.contact}
                 sx={{ gridColumn: "span 4" }}
               />
-              <TextField
-                fullWidth
-                variant="filled"
-                type="text"
-                label="Occupation "
-                onBlur={props.handleBlur}
-                onChange={props.handleChange}
-                value={props.values.occupation}
-                name="occupation"
-                error={!!props.touched.occupation && !!props.errors.occupation}
-                helperText={props.touched.occupation && props.errors.occupation}
-                sx={{ gridColumn: "span 4" }}
-              />
-              <TextField
-                fullWidth
-                variant="filled"
-                type="text"
-                label="Address"
-                onBlur={props.handleBlur}
-                onChange={props.handleChange}
-                value={props.values.address}
-                name="address"
-                error={!!props.touched.address && !!props.errors.address}
-                helperText={props.touched.address && props.errors.address}
-                sx={{ gridColumn: "span 4" }}
-              />
+
+              {title === "Student" || "Teacher" || "Staff" ? undefined : (
+                <TextField
+                  fullWidth
+                  variant="filled"
+                  type="text"
+                  label="Occupation "
+                  onBlur={props.handleBlur}
+                  onChange={props.handleChange}
+                  value={props.values.occupation}
+                  name="occupation"
+                  error={
+                    !!props.touched.occupation && !!props.errors.occupation
+                  }
+                  helperText={
+                    props.touched.occupation && props.errors.occupation
+                  }
+                  sx={{ gridColumn: "span 4" }}
+                />
+              )}
+
+              {title === "Student" ? undefined : (
+                <TextField
+                  fullWidth
+                  variant="filled"
+                  type="text"
+                  label="Address"
+                  onBlur={props.handleBlur}
+                  onChange={props.handleChange}
+                  value={props.values.address}
+                  name="address"
+                  error={!!props.touched.address && !!props.errors.address}
+                  helperText={props.touched.address && props.errors.address}
+                  sx={{ gridColumn: "span 4" }}
+                />
+              )}
             </Box>
             <Box display="flex" justifyContent="end" mt="20px">
               <Button type="submit" color="secondary" variant="contained">

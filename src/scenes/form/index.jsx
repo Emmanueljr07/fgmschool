@@ -9,8 +9,8 @@ const initialValues = {
   lastName: "",
   email: "",
   contact: "",
-  address1: "",
-  address2: "",
+  occupation: "",
+  address: "",
 };
 
 const phoneRegExp =
@@ -24,11 +24,11 @@ const userSchema = yup.object().shape({
     .string()
     .matches(phoneRegExp, "Phone number is not valid")
     .required("required"),
-  address1: yup.string().required("required"),
-  address2: yup.string().required("required"),
+  occupation: yup.string().required("required"),
+  address: yup.string().required("required"),
 });
 
-const Form = () => {
+const Form = ({ title }) => {
   const isNonMobile = useMediaQuery("(min-width:600px)");
 
   const handleFormSubmit = (values) => {
@@ -117,26 +117,26 @@ const Form = () => {
                 fullWidth
                 variant="filled"
                 type="text"
-                label="Address 1"
+                label="Occupation"
                 onBlur={handleBlur}
                 onChange={handleChange}
-                value={values.address1}
-                name="address1"
-                error={!!touched.address1 && !!errors.address1}
-                helperText={touched.address1 && errors.address1}
+                value={values.occupation}
+                name="occupation"
+                error={!!touched.occupation && !!errors.occupation}
+                helperText={touched.occupation && errors.occupation}
                 sx={{ gridColumn: "span 4" }}
               />
               <TextField
                 fullWidth
                 variant="filled"
                 type="text"
-                label="Address 2"
+                label="Address "
                 onBlur={handleBlur}
                 onChange={handleChange}
-                value={values.address2}
-                name="address2"
-                error={!!touched.address2 && !!errors.address2}
-                helperText={touched.address2 && errors.address2}
+                value={values.address}
+                name="address"
+                error={!!touched.address && !!errors.address}
+                helperText={touched.address && errors.address}
                 sx={{ gridColumn: "span 4" }}
               />
             </Box>

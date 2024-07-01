@@ -45,15 +45,10 @@ const MySidebar = () => {
   const colors = tokens(theme.palette.mode);
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [selected, setSelected] = useState("Dashboard");
-  const viewHeight = window.outerHeight;
   return (
     <Box
       sx={{
         display: "flex",
-        height: { viewHeight },
-        minHeight: "400px",
-        // marginBottom: "-80%",
-
         "& .ps-sidebar-container": {
           background: `${colors.primary[400]} !important`,
         },
@@ -131,7 +126,7 @@ const MySidebar = () => {
               />
               <Item
                 title="Admission Form"
-                to="/addform"
+                to="/addstudent"
                 icon={<PersonAddIcon />}
                 selected={selected}
                 setSelected={setSelected}
@@ -148,7 +143,7 @@ const MySidebar = () => {
               />
               <Item
                 title="Add Teacher"
-                to="/form"
+                to="/addteacher"
                 icon={<PersonAddIcon />}
                 selected={selected}
                 setSelected={setSelected}
@@ -182,7 +177,7 @@ const MySidebar = () => {
               />
               <Item
                 title="Add Staffs"
-                to="/form"
+                to="/addstaff"
                 icon={<PersonAddIcon />}
                 selected={selected}
                 setSelected={setSelected}
@@ -191,14 +186,14 @@ const MySidebar = () => {
             <SubMenu label="Parents" icon={<AssignmentIndIcon />}>
               <Item
                 title="All Parents "
-                to="/teachers"
+                to="/parents"
                 icon={<SupervisedUserCircleIcon />}
                 selected={selected}
                 setSelected={setSelected}
               />
               <Item
                 title="Add Parent"
-                to="/form"
+                to="/addparent"
                 icon={<PersonAddIcon />}
                 selected={selected}
                 setSelected={setSelected}
