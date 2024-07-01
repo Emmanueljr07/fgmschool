@@ -1,5 +1,11 @@
 import { useState } from "react";
-import { Sidebar, Menu, MenuItem, SubMenu } from "react-pro-sidebar";
+import {
+  Sidebar,
+  Menu,
+  MenuItem,
+  SubMenu,
+  menuClasses,
+} from "react-pro-sidebar";
 import { Box, IconButton, Typography, useTheme } from "@mui/material";
 import { Link } from "react-router-dom";
 import { tokens } from "../../theme";
@@ -22,16 +28,15 @@ const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   return (
-    <Link to={to} style={{ textDecoration: "none" }}>
-      <MenuItem
-        active={selected === title}
-        style={{ color: colors.grey[100] }}
-        onClick={() => setSelected(title)}
-        icon={icon}
-      >
-        <Typography>{title}</Typography>
-      </MenuItem>
-    </Link>
+    <MenuItem
+      component={<Link to={to} />}
+      active={selected === title}
+      style={{ color: colors.grey[100] }}
+      onClick={() => setSelected(title)}
+      icon={icon}
+    >
+      <Typography>{title}</Typography>
+    </MenuItem>
   );
 };
 
@@ -40,10 +45,15 @@ const MySidebar = () => {
   const colors = tokens(theme.palette.mode);
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [selected, setSelected] = useState("Dashboard");
-
+  const viewHeight = window.outerHeight;
   return (
     <Box
       sx={{
+        display: "flex",
+        height: { viewHeight },
+        minHeight: "400px",
+        // marginBottom: "-80%",
+
         "& .ps-sidebar-container": {
           background: `${colors.primary[400]} !important`,
         },
@@ -54,14 +64,17 @@ const MySidebar = () => {
           padding: "5px 35px 5px 20px !important",
         },
         "& .ps-menu-button:hover": {
-          color: "#868dfb !important",
+          backgroundColor: "#868dfb !important",
         },
         "& .ps-active": {
           color: "#6870fa !important",
         },
+        [`.${menuClasses.subMenuContent}`]: {
+          backgroundColor: colors.primary[400],
+        },
       }}
     >
-      <Sidebar collapsed={isCollapsed}>
+      <Sidebar collapsed={isCollapsed} transitionDuration={800}>
         <Menu iconShape="square">
           {/* {LOGO AND MENU ICON} */}
           <MenuItem
