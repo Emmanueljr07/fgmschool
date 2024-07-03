@@ -1,4 +1,4 @@
-import { Box, Typography, useTheme, Button } from "@mui/material";
+import { Box, Typography, useTheme, Button, IconButton } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import { tokens } from "../../theme";
 import { mockDataTeam } from "../../data/mockData";
@@ -7,17 +7,30 @@ import LockOpenOutlinedIcon from "@mui/icons-material/LockOpenOutlined";
 import SecurityOutlinedIcon from "@mui/icons-material/SecurityOutlined";
 import Header from "../../Components/Header";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 const Team = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+  const onEditButtonClick = (e, row) => {
+    e.stopPropagation();
+    console.log(row);
+    //do whatever you want with the row
+  };
+  const onDeleteButtonClick = (e, row) => {
+    e.stopPropagation();
+    console.log(row.id);
+    //do whatever you want with the row
+  };
 
   const columns = [
     { field: "id", headerName: "ID" },
     {
       field: "name",
       headerName: "Name",
-      width: 180,
+      flex: 1,
+      minWidth: 200,
       cellClassName: "name-column--cell",
     },
     {
@@ -26,17 +39,19 @@ const Team = () => {
       type: "number",
       headerAlign: "left",
       align: "left",
+      minWidth: 100,
     },
-    { field: "phone", headerName: "Phone Number", width: 100 },
-    { field: "email", headerName: "Email", width: 150 },
+    { field: "phone", headerName: "Phone Number", flex: 1, minWidth: 150 },
+    { field: "email", headerName: "Email", flex: 1.5, minWidth: 150 },
     {
       field: "access",
       headerName: "Access Level",
-      width: 100,
+      flex: 1.4,
+      minWidth: 150,
       renderCell: ({ row: { access } }) => {
         return (
           <Box
-            width="100%"
+            width="60%"
             m="0 auto"
             marginTop={"10px"}
             p="5px"
@@ -55,6 +70,34 @@ const Team = () => {
             <Typography color={colors.grey[100]} sx={{ ml: "5px" }}>
               {access}
             </Typography>
+          </Box>
+        );
+      },
+    },
+    {
+      field: "actions",
+      headerName: "",
+      width: 120,
+      sortable: false,
+      disableColumnMenu: true,
+      renderCell: (params) => {
+        return (
+          <Box
+            sx={{
+              // backgroundColor: "whitesmoke",
+              width: "100%",
+              height: "100%",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <IconButton onClick={(e) => onEditButtonClick(e, params.row)}>
+              <EditIcon />
+            </IconButton>
+            <IconButton onClick={(e) => onDeleteButtonClick(e, params.row)}>
+              <DeleteIcon />
+            </IconButton>
           </Box>
         );
       },

@@ -25,7 +25,7 @@ const Dashboard = () => {
         gridColumn="span 2"
         display="grid"
         gridTemplateColumns="repeat(12, 1fr)"
-        gridAutoRows="110px"
+        gridAutoRows="120px"
         gap="15px"
       >
         {/* ROW 1 */}
@@ -106,7 +106,7 @@ const Dashboard = () => {
                 fontWeight="600"
                 color={colors.grey[100]}
               >
-                Revenue Generated
+                School Fees
               </Typography>
             </Box>
             <Box>
