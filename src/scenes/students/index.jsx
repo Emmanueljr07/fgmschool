@@ -11,26 +11,28 @@ const Students = () => {
   const colors = tokens(theme.palette.mode);
 
   const columns = [
-    { field: "id", headerName: "ID", flex: 0.5 },
-    { field: "registrarId", headerName: "Registrar ID" },
+    { field: "id", headerName: "ID", width: 50 },
+    // { field: "registrarId", headerName: "First Name" },
     {
       field: "name",
-      headerName: "Name",
-      flex: 1,
+      headerName: "Name", //Apppend First and last Name
+      width: 180,
       cellClassName: "name-column--cell",
     },
     {
       field: "age",
-      headerName: "Age",
+      headerName: "Date of Birth",
       type: "number",
+      width: 180,
       headerAlign: "left",
       align: "left",
     },
-    { field: "phone", headerName: "Phone Number", flex: 1 },
-    { field: "email", headerName: "Email", flex: 1 },
-    { field: "address", headerName: "Address", flex: 1 },
-    { field: "city", headerName: "City", flex: 1 },
-    { field: "zipCode", headerName: "ZipCode", flex: 1 },
+    { field: "gender", headerName: "Gender", width: 100 },
+    { field: "parent", headerName: "Parent", width: 200 },
+    { field: "class", headerName: "Class", width: 150 },
+    { field: "phone", headerName: "Contact", width: 180 },
+    { field: "email", headerName: "Email", width: 200 },
+    { field: "address", headerName: "Address", width: 220 },
   ];
 
   return (
@@ -38,7 +40,7 @@ const Students = () => {
       <Header title="Students" subtitle="List of Students" />
       <Box
         m="40px 0 0 0"
-        height="150vh"
+        height="130vh"
         sx={{
           "& .MuiDataGrid-root": {
             borderTop: "none",

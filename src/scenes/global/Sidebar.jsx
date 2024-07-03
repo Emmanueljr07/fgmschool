@@ -160,7 +160,7 @@ const MySidebar = () => {
               />
               <Item
                 title="Add Class"
-                to="/form"
+                to="/createclass"
                 icon={<PersonAddIcon />}
                 selected={selected}
                 setSelected={setSelected}

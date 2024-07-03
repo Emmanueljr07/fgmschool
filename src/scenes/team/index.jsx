@@ -17,7 +17,7 @@ const Team = () => {
     {
       field: "name",
       headerName: "Name",
-      flex: 1,
+      width: 180,
       cellClassName: "name-column--cell",
     },
     {
@@ -27,16 +27,16 @@ const Team = () => {
       headerAlign: "left",
       align: "left",
     },
-    { field: "phone", headerName: "Phone Number", flex: 1 },
-    { field: "email", headerName: "Email", flex: 1 },
+    { field: "phone", headerName: "Phone Number", width: 100 },
+    { field: "email", headerName: "Email", width: 150 },
     {
       field: "access",
       headerName: "Access Level",
-      flex: 1,
+      width: 100,
       renderCell: ({ row: { access } }) => {
         return (
           <Box
-            width="60%"
+            width="100%"
             m="0 auto"
             marginTop={"10px"}
             p="5px"

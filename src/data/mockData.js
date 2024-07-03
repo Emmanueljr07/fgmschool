@@ -86,6 +86,9 @@ export const mockDataContacts = [
     city: "New York",
     zipCode: "10001",
     registrarId: 123512,
+    gender: "Male",
+    parent: "Eddard Stark",
+    class: "form1",
   },
   {
     id: 2,
@@ -97,6 +100,9 @@ export const mockDataContacts = [
     city: "New York",
     zipCode: "13151",
     registrarId: 123512,
+    gender: "Male",
+    parent: "yuik Stark",
+    class: "form4",
   },
   {
     id: 3,
@@ -108,6 +114,9 @@ export const mockDataContacts = [
     city: "New York",
     zipCode: "87281",
     registrarId: 4132513,
+    gender: "Female",
+    parent: "Mary",
+    class: "form2",
   },
   {
     id: 4,
@@ -119,6 +128,9 @@ export const mockDataContacts = [
     city: "New York",
     zipCode: "15551",
     registrarId: 123512,
+    gender: "Male",
+    parent: "Eddard Stark",
+    class: "form5",
   },
   {
     id: 5,
@@ -130,6 +142,9 @@ export const mockDataContacts = [
     city: "Tenting",
     zipCode: "14215",
     registrarId: 123512,
+    gender: "Female",
+    parent: "Starurt",
+    class: "lowerSixth",
   },
   {
     id: 6,
@@ -141,6 +156,9 @@ export const mockDataContacts = [
     city: "Esvazark",
     zipCode: "10001",
     registrarId: 123512,
+    gender: "Male",
+    parent: "Eddard Stark",
+    class: "form1",
   },
   {
     id: 7,
@@ -152,6 +170,9 @@ export const mockDataContacts = [
     city: "Evertin",
     zipCode: "51523",
     registrarId: 123512,
+    gender: "Female",
+    parent: "Eddard Stark",
+    class: "form1",
   },
   {
     id: 8,
@@ -163,6 +184,9 @@ export const mockDataContacts = [
     city: "Esteras",
     zipCode: "44215",
     registrarId: 512315,
+    gender: "Female",
+    parent: "Eddard Stark",
+    class: "form2",
   },
   {
     id: 9,
@@ -174,6 +198,9 @@ export const mockDataContacts = [
     city: "Colunza",
     zipCode: "111234",
     registrarId: 928397,
+    gender: "Male",
+    parent: "Eddard Stark",
+    class: "form1",
   },
   {
     id: 10,
@@ -196,6 +223,9 @@ export const mockDataContacts = [
     city: "Colunza",
     zipCode: "1234",
     registrarId: 92197,
+    gender: "Male",
+    parent: "Eddard Stark",
+    class: "form1",
   },
 ];
 

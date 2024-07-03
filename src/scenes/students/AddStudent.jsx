@@ -2,7 +2,7 @@ import { Box, Button, MenuItem, TextField } from "@mui/material";
 import { Form, Formik } from "formik";
 import * as yup from "yup";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import Header from "./Header";
+import Header from "../../Components/Header";
 import dayjs from "dayjs";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
@@ -18,14 +18,13 @@ const initialValues = {
   email: "",
   password: "",
   contact: "",
-  occupation: "",
   address: "",
 };
 
 const phoneRegExp =
   /^((\+[1-9]{1-4}[ -]?|)(\([0-9]{2-3}\)[ -]?)|([0-9]{2,4})[ -]?)*?[0-9]{3,4}[ -]?[0-9]{3,4}$/;
 
-const userSchema = yup.object().shape({
+const studentSchema = yup.object().shape({
   firstName: yup.string().required("required"),
   lastName: yup.string().required("required"),
   parent: yup.string().required("required"),
@@ -37,28 +36,29 @@ const userSchema = yup.object().shape({
     .string()
     .matches(phoneRegExp, "Phone number is not valid")
     .required("required"),
-  occupation: yup.string().required("required"),
   address: yup.string().required("required"),
 });
 
-const AddForm = () => {
+const AddStudent = () => {
   const isNonMobile = useMediaQuery("(min-width:600px)");
 
-  const handleFormSubmit = (formValues) => {
+  const handleFormSubmit = (formValues, { resetForm }) => {
     console.log(formValues);
     console.log(dob);
+    resetForm();
+    setDob(dayjs(""));
   };
 
-  const [dob, setDob] = useState(dayjs().add(1, "day"));
+  const [dob, setDob] = useState(dayjs(""));
 
   return (
     <Box m="20px">
-      <Header title={"Add New User"} />
+      <Header title={"Addmission Form"} />
 
       <Formik
         onSubmit={handleFormSubmit}
         initialValues={initialValues}
-        validationSchema={userSchema}
+        validationSchema={studentSchema}
       >
         {(props) => (
           <Form>
@@ -127,7 +127,7 @@ const AddForm = () => {
                 sx={{ gridColumn: "span 2" }}
               >
                 <MenuItem value="form1">Form 1</MenuItem>
-                <MenuItem value="form2">Form 1</MenuItem>
+                <MenuItem value="form2">Form 2</MenuItem>
               </TextField>
 
               <TextField
@@ -216,20 +216,6 @@ const AddForm = () => {
                 fullWidth
                 variant="filled"
                 type="text"
-                label="Occupation "
-                onBlur={props.handleBlur}
-                onChange={props.handleChange}
-                value={props.values.occupation}
-                name="occupation"
-                error={!!props.touched.occupation && !!props.errors.occupation}
-                helperText={props.touched.occupation && props.errors.occupation}
-                sx={{ gridColumn: "span 4" }}
-              />
-
-              <TextField
-                fullWidth
-                variant="filled"
-                type="text"
                 label="Address"
                 onBlur={props.handleBlur}
                 onChange={props.handleChange}
@@ -242,7 +228,7 @@ const AddForm = () => {
             </Box>
             <Box display="flex" justifyContent="end" mt="20px">
               <Button type="submit" color="secondary" variant="contained">
-                Create New User
+                Create New Student
               </Button>
             </Box>
           </Form>
@@ -252,4 +238,4 @@ const AddForm = () => {
   );
 };
 
-export default AddForm;
+export default AddStudent;

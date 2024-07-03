@@ -6,14 +6,16 @@ import MySidebar from "./scenes/global/Sidebar";
 import Dashboard from "./scenes/dashboard";
 import Team from "./scenes/team";
 import Teachers from "./scenes/teachers";
+import AddTeacher from "./scenes/teachers/AddTeacher";
 import Parents from "./scenes/parent";
+import AddParent from "./scenes/parent/AddParent";
 import Students from "./scenes/students";
-import Form from "./scenes/form";
+import AddStudent from "./scenes/students/AddStudent";
 import Calendar from "./scenes/calendar";
 import NoticeBoard from "./scenes/noticeboard";
 import Class from "./scenes/class";
 import Staffs from "./scenes/staffs";
-import AddForm from "./Components/AddForm";
+import AddStaff from "./scenes/staffs/AddStaff";
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -34,13 +36,13 @@ function App() {
               <Route path="/parents" element={<Parents />} />
               <Route path="/staffs" element={<Staffs />} />
               <Route path="/class" element={<Class />} />
-              <Route path="/form" element={<Form />} />
               <Route path="/calendar" element={<Calendar />} />
               <Route path="/notice" element={<NoticeBoard />} />
-              <Route path="/addstudent" element={<AddForm title="Student" />} />
-              <Route path="/addparent" element={<AddForm title="Parent" />} />
-              <Route path="/addteacher" element={<AddForm title="Teacher" />} />
-              <Route path="/addstaff" element={<AddForm title="Staff" />} />
+              <Route path="/addstudent" element={<AddStudent />} />
+              <Route path="/addparent" element={<AddParent />} />
+              <Route path="/addteacher" element={<AddTeacher />} />
+              <Route path="/addstaff" element={<AddStaff />} />
+              {/* <Route path="/createclass" element={<CreateClass />} /> */}
             </Routes>
           </main>
         </div>
