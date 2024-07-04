@@ -1,38 +1,77 @@
-import { Box } from "@mui/material";
+import { Box, IconButton } from "@mui/material";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import { tokens } from "../../theme";
 import { mockDataContacts } from "../../data/mockData";
-
 import Header from "../../Components/Header";
 import { useTheme } from "@mui/material";
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 const Students = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+  const onEditButtonClick = (e, row) => {
+    e.stopPropagation();
+    console.log(row);
+    //do whatever you want with the row
+  };
+  const onDeleteButtonClick = (e, row) => {
+    e.stopPropagation();
+    console.log(row.id);
+    //do whatever you want with the row
+  };
 
   const columns = [
-    { field: "id", headerName: "ID", width: 50 },
+    { field: "id", headerName: "ID" },
     // { field: "registrarId", headerName: "First Name" },
     {
       field: "name",
       headerName: "Name", //Apppend First and last Name
-      width: 180,
+      minWidth: 180,
+      flex: 1,
       cellClassName: "name-column--cell",
     },
     {
       field: "age",
       headerName: "Date of Birth",
       type: "number",
-      width: 180,
+      minWidth: 100,
       headerAlign: "left",
       align: "left",
     },
-    { field: "gender", headerName: "Gender", width: 100 },
-    { field: "parent", headerName: "Parent", width: 200 },
-    { field: "class", headerName: "Class", width: 150 },
-    { field: "phone", headerName: "Contact", width: 180 },
-    { field: "email", headerName: "Email", width: 200 },
-    { field: "address", headerName: "Address", width: 220 },
+    { field: "gender", headerName: "Gender", flex: 1, minWidth: 100 },
+    { field: "parent", headerName: "Parent", flex: 1, minWidth: 160 },
+    { field: "class", headerName: "Class", flex: 1, minWidth: 100 },
+    { field: "phone", headerName: "Contact", flex: 1, minWidth: 150 },
+    { field: "email", headerName: "Email", flex: 1, minWidth: 180 },
+    {
+      field: "actions",
+      headerName: "",
+      width: 120,
+      sortable: false,
+      disableColumnMenu: true,
+      renderCell: (params) => {
+        return (
+          <Box
+            sx={{
+              width: "100%",
+              height: "100%",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <IconButton onClick={(e) => onEditButtonClick(e, params.row)}>
+              <EditIcon />
+            </IconButton>
+            <IconButton onClick={(e) => onDeleteButtonClick(e, params.row)}>
+              <DeleteIcon />
+            </IconButton>
+          </Box>
+        );
+      },
+    },
+    // { field: "address", headerName: "Address", minWidth: 220 },
   ];
 
   return (
@@ -43,16 +82,10 @@ const Students = () => {
         height="130vh"
         sx={{
           "& .MuiDataGrid-root": {
-            borderTop: "none",
-            borderRight: "none",
-            borderLeft: "none",
-            borderBottom: "none",
+            border: "none",
           },
           "& .MuiDataGrid-cell": {
-            borderTop: "none",
-            borderRight: "none",
-            borderLeft: "none",
-            borderBottom: "none",
+            border: "none",
           },
           "& .name-column--cell": {
             color: colors.greenAccent[300],
