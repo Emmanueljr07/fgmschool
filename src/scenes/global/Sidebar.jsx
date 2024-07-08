@@ -72,30 +72,30 @@ const MySidebar = () => {
       <Sidebar collapsed={isCollapsed} transitionDuration={800}>
         <Menu iconShape="square">
           {/* {LOGO AND MENU ICON} */}
-          <MenuItem
-            onClick={() => setIsCollapsed(!isCollapsed)}
-            icon={isCollapsed ? <MenuOutlinedIcon /> : undefined}
-            style={{
-              margin: "10px 0 20px 0",
-              color: colors.grey[100],
-            }}
+
+          <Box
+            display="flex"
+            alignItems="center"
+            ml="20px"
+            mb="20px"
+            sx={{ display: { xs: "none", md: "flex" } }}
           >
-            {!isCollapsed && (
-              <Box
-                display="flex"
-                justifyContent="space-between"
-                alignItems="center"
-                ml="15px"
-              >
-                <Typography variant="h3" color={colors.grey[100]}>
-                  ADMIN
-                </Typography>
-                <IconButton onClick={() => setIsCollapsed(!isCollapsed)}>
-                  <MenuOutlinedIcon />
-                </IconButton>
-              </Box>
-            )}
-          </MenuItem>
+            <IconButton onClick={() => setIsCollapsed(!isCollapsed)}>
+              <MenuOutlinedIcon />
+            </IconButton>
+          </Box>
+          <Box
+            display="flex"
+            justifyContent="start"
+            alignItems="center"
+            ml="20px"
+            mb="20px"
+            sx={{ display: { xs: "flex", md: "none" } }}
+          >
+            <IconButton onClick={() => setIsCollapsed(!isCollapsed)}>
+              <MenuOutlinedIcon />
+            </IconButton>
+          </Box>
 
           {/* {MENU ITEMS} */}
 
