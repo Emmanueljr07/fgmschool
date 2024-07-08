@@ -16,6 +16,7 @@ import NoticeBoard from "./scenes/noticeboard";
 import Class from "./scenes/class";
 import Staffs from "./scenes/staffs";
 import AddStaff from "./scenes/staffs/AddStaff";
+// import Home from "./scenes/home/home";
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -29,7 +30,8 @@ function App() {
           <main className="content">
             <Topbar />
             <Routes>
-              <Route path="/" element={<Dashboard />} />
+              {/* <Route path="/" element={<Home />} /> */}
+              <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/team" element={<Team />} />
               <Route path="/students" element={<Students />} />
               <Route path="/teachers" element={<Teachers />} />

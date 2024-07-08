@@ -47,7 +47,9 @@ const NavBar = () => {
               color="inherit"
               startIcon={<Lock />}
               onClick={() => dispatch({ type: "UPDATE_USER", payload: user })}
-            ></Button>
+            >
+              LOGIN
+            </Button>
           </Box>
         </Toolbar>
       </Container>
