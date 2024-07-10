@@ -10,6 +10,24 @@ const reducer = (state, action) => {
         ...state,
         openAddMember: false,
       };
+
+    case "START_LOADING":
+      return {
+        ...state,
+        loading: true,
+      };
+    case "END_LOADING":
+      return {
+        ...state,
+        loading: false,
+      };
+
+    case "UPDATE_ALERT":
+      return {
+        ...state,
+        alert: action.payload,
+      };
+
     case "UPDATE_USER":
       return {
         ...state,

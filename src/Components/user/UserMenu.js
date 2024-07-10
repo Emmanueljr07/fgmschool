@@ -9,12 +9,22 @@ const UserMenu = ({ anchorUserMenu, setAnchorUserMenu }) => {
   const handleCloseUserMenu = () => {
     setAnchorUserMenu(null);
   };
+
+  const handleLogout = () => {
+    // dispatch({ type: "UPDATE_USER", payload: null });
+    dispatch({
+      type: "UPDATE_ALERT",
+      payload: { open: true, severity: "error", message: "Logged out!" },
+    });
+    handleCloseUserMenu();
+  };
+
   return (
     <Menu
       anchorEl={anchorUserMenu}
       open={Boolean(anchorUserMenu)}
       onClose={handleCloseUserMenu}
-      onclick={handleCloseUserMenu}
+      onClick={handleCloseUserMenu}
     >
       <MenuItem>
         <ListItemIcon>
@@ -22,9 +32,7 @@ const UserMenu = ({ anchorUserMenu, setAnchorUserMenu }) => {
         </ListItemIcon>
         Profile
       </MenuItem>
-      <MenuItem
-        onclick={() => dispatch({ type: "UPDATE_USER", payload: null })}
-      >
+      <MenuItem onClick={handleLogout}>
         <ListItemIcon>
           <Logout fontSize="small" />
         </ListItemIcon>

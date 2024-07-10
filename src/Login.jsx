@@ -100,7 +100,7 @@ const Login = () => {
                 <TextField
                   fullWidth
                   variant="standard"
-                  type={showPassword ? "password" : "text"}
+                  type={showPassword ? "text" : "password"}
                   label="Password"
                   onBlur={props.handleBlur}
                   onChange={props.handleChange}

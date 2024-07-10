@@ -17,7 +17,7 @@ import { useValue } from "../../context/ContextProvider";
 
 const initialValues = {
   name: "",
-  age: 0,
+  age: null,
   contact: "",
   email: "",
   password: "",
@@ -88,7 +88,6 @@ const AddMember = () => {
                 inputMode={{ minLength: 3 }}
               />
               <TextField
-                autoFocus
                 margin="normal"
                 variant="standard"
                 type="number"
@@ -102,7 +101,6 @@ const AddMember = () => {
                 sx={{}}
               />
               <TextField
-                autoFocus
                 margin="normal"
                 variant="standard"
                 type="text"
@@ -117,7 +115,6 @@ const AddMember = () => {
                 sx={{}}
               />
               <TextField
-                autoFocus
                 margin="normal"
                 variant="standard"
                 type="text"
@@ -131,9 +128,10 @@ const AddMember = () => {
                 sx={{}}
               />
               <TextField
+                margin="normal"
                 fullWidth
                 variant="standard"
-                type={showPassword ? "password" : "text"}
+                type={showPassword ? "text" : "password"}
                 label="Password"
                 onBlur={props.handleBlur}
                 onChange={props.handleChange}
