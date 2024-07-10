@@ -9,15 +9,24 @@ import Header from "../../Components/Header";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
+import { useValue } from "../../context/ContextProvider";
+import AddMember from "./AddMember";
 
 const Team = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+
+  const {
+    // state: {currentUser},
+    dispatch,
+  } = useValue();
+
   const onEditButtonClick = (e, row) => {
     e.stopPropagation();
     console.log(row);
     //do whatever you want with the row
   };
+
   const onDeleteButtonClick = (e, row) => {
     e.stopPropagation();
     console.log(row.id);
@@ -105,55 +114,59 @@ const Team = () => {
   ];
 
   return (
-    <Box m="20px">
-      <Box display="flex" justifyContent="space-between" alignItems="center">
-        <Header title="TEAM" subtitle="Managing the Team Members" />
+    <>
+      <AddMember />
+      <Box m="20px">
+        <Box display="flex" justifyContent="space-between" alignItems="center">
+          <Header title="TEAM" subtitle="Managing the Team Members" />
 
-        <Box>
-          <Button
-            sx={{
+          <Box>
+            <Button
+              sx={{
+                backgroundColor: colors.blueAccent[700],
+                color: colors.grey[100],
+                fontSize: "14px",
+                fontWeight: "bold",
+                padding: "10px 20px",
+              }}
+              onClick={() => dispatch({ type: "OPEN_ADD_MEMBER" })}
+            >
+              <PersonAddIcon sx={{ mr: "10px" }} />
+              Add Member
+            </Button>
+          </Box>
+        </Box>
+
+        <Box
+          m="40px 0 0 0"
+          height="130vh"
+          sx={{
+            "& .MuiDataGrid-root": {
+              border: "none",
+            },
+            "& .MuiDataGrid-cell": {
+              border: "none",
+            },
+            "& .name-column--cell": {
+              color: colors.greenAccent[300],
+            },
+            "& .MuiDataGrid-columnHeader": {
               backgroundColor: colors.blueAccent[700],
-              color: colors.grey[100],
-              fontSize: "14px",
-              fontWeight: "bold",
-              padding: "10px 20px",
-            }}
-          >
-            <PersonAddIcon sx={{ mr: "10px" }} />
-            Add Member
-          </Button>
+              borderBottom: "none",
+            },
+            "& .MuiDataGrid-virtualScroller": {
+              backgroundColor: colors.primary[400],
+            },
+            "& .MuiDataGrid-footerContainer": {
+              borderTop: "none",
+              backgroundColor: colors.blueAccent[700],
+            },
+          }}
+        >
+          <DataGrid rows={mockDataTeam} columns={columns} />
         </Box>
       </Box>
-
-      <Box
-        m="40px 0 0 0"
-        height="130vh"
-        sx={{
-          "& .MuiDataGrid-root": {
-            border: "none",
-          },
-          "& .MuiDataGrid-cell": {
-            border: "none",
-          },
-          "& .name-column--cell": {
-            color: colors.greenAccent[300],
-          },
-          "& .MuiDataGrid-columnHeader": {
-            backgroundColor: colors.blueAccent[700],
-            borderBottom: "none",
-          },
-          "& .MuiDataGrid-virtualScroller": {
-            backgroundColor: colors.primary[400],
-          },
-          "& .MuiDataGrid-footerContainer": {
-            borderTop: "none",
-            backgroundColor: colors.blueAccent[700],
-          },
-        }}
-      >
-        <DataGrid rows={mockDataTeam} columns={columns} />
-      </Box>
-    </Box>
+    </>
   );
 };
 

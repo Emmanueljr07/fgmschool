@@ -1,11 +1,11 @@
 import { ColorModeContext, useMode } from "../theme";
 import { CssBaseline, ThemeProvider } from "@mui/material";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 
 import Topbar from "./global/Topbar";
 import MySidebar from "./global/Sidebar";
 import Dashboard from "./dashboard";
-import Team from "./team";
+import Team from "./team/index.jsx";
 import Teachers from "./teachers";
 import AddTeacher from "./teachers/AddTeacher";
 import Parents from "./parent";
@@ -29,7 +29,8 @@ const AdminHomePage = () => {
           <main className="content">
             <Topbar />
             <Routes>
-              {/* <Route path="/" element={<Home />} /> */}
+              <Route path="/" exact element={<Navigate to="/dashboard" />} />
+
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/team" element={<Team />} />
               <Route path="/students" element={<Students />} />

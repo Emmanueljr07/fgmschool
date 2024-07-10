@@ -3,10 +3,7 @@ import reducer from "./reducer";
 
 const initialState = {
   currentUser: null,
-  //   sidebar: {
-  //     isCollapsed: false,
-  //     selected: "Dashboard"
-  //   }
+  openAddMember: false,
 };
 
 const Context = createContext(initialState);

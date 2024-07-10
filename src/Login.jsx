@@ -86,7 +86,7 @@ const Login = () => {
                 <TextField
                   autoFocus
                   variant="standard"
-                  type="text"
+                  type="email"
                   label="Email"
                   fullWidth
                   onBlur={props.handleBlur}
@@ -100,7 +100,7 @@ const Login = () => {
                 <TextField
                   fullWidth
                   variant="standard"
-                  type="password"
+                  type={showPassword ? "password" : "text"}
                   label="Password"
                   onBlur={props.handleBlur}
                   onChange={props.handleChange}
