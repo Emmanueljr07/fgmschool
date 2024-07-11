@@ -13,16 +13,20 @@ import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import PeopleOutlinedIcon from "@mui/icons-material/PeopleOutlined";
 import SchoolIcon from "@mui/icons-material/School";
 import GroupIcon from "@mui/icons-material/Group";
-import ClassIcon from "@mui/icons-material/Class";
 import Diversity2Icon from "@mui/icons-material/Diversity2";
-import AssignmentIndIcon from "@mui/icons-material/AssignmentInd";
 import ContactsOutlinedIcon from "@mui/icons-material/ContactsOutlined";
 import ReceiptOutlinedIcon from "@mui/icons-material/ReceiptOutlined";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import CalendarTodayOutlinedIcon from "@mui/icons-material/CalendarTodayOutlined";
 import HelpOutlinedIcon from "@mui/icons-material/HelpOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
-import SupervisedUserCircleIcon from "@mui/icons-material/SupervisedUserCircle";
+import SubjectIcon from "@mui/icons-material/Subject";
+import LibraryBooksIcon from "@mui/icons-material/LibraryBooks";
+import TokenIcon from "@mui/icons-material/Token";
+import QuizIcon from "@mui/icons-material/Quiz";
+import GradingIcon from "@mui/icons-material/Grading";
+import GradeIcon from "@mui/icons-material/Grade";
+import PaymentsIcon from "@mui/icons-material/Payments";
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
@@ -75,9 +79,11 @@ const MySidebar = () => {
 
           <Box
             display="flex"
+            justifyContent="end"
             alignItems="center"
-            ml="20px"
-            mb="20px"
+            mt="15px"
+            mr="20px"
+            mb="15px"
             sx={{ display: { xs: "none", md: "flex" } }}
           >
             <IconButton onClick={() => setIsCollapsed(!isCollapsed)}>
@@ -86,10 +92,11 @@ const MySidebar = () => {
           </Box>
           <Box
             display="flex"
-            justifyContent="start"
+            justifyContent="end"
             alignItems="center"
-            ml="20px"
-            mb="20px"
+            mt="15px"
+            mr="20px"
+            mb="15px"
             sx={{ display: { xs: "flex", md: "none" } }}
           >
             <IconButton onClick={() => setIsCollapsed(!isCollapsed)}>
@@ -166,40 +173,47 @@ const MySidebar = () => {
                 setSelected={setSelected}
               />
             </SubMenu>
-
-            <SubMenu label="Staffs" icon={<ClassIcon />}>
+            <SubMenu label="Subject" icon={<LibraryBooksIcon />}>
               <Item
-                title="All Staff "
-                to="/staffs"
-                icon={<ReceiptOutlinedIcon />}
-                selected={selected}
-                setSelected={setSelected}
-              />
-              <Item
-                title="Add Staffs"
-                to="/addstaff"
-                icon={<PersonAddIcon />}
-                selected={selected}
-                setSelected={setSelected}
-              />
-            </SubMenu>
-            <SubMenu label="Parents" icon={<AssignmentIndIcon />}>
-              <Item
-                title="All Parents "
-                to="/parents"
-                icon={<SupervisedUserCircleIcon />}
-                selected={selected}
-                setSelected={setSelected}
-              />
-              <Item
-                title="Add Parent"
-                to="/addparent"
-                icon={<PersonAddIcon />}
+                title="Manage Subjects"
+                to="/subjects"
+                icon={<SubjectIcon />}
                 selected={selected}
                 setSelected={setSelected}
               />
             </SubMenu>
 
+            <SubMenu label="Exam Section" icon={<TokenIcon />}>
+              <Item
+                title="Exam Lists "
+                to="/exams"
+                icon={<QuizIcon />}
+                selected={selected}
+                setSelected={setSelected}
+              />
+              <Item
+                title="Exam Grades"
+                to="/grades"
+                icon={<GradingIcon />}
+                selected={selected}
+                setSelected={setSelected}
+              />
+              <Item
+                title="Manage Marks"
+                to="/studentmarks"
+                icon={<GradeIcon />}
+                selected={selected}
+                setSelected={setSelected}
+              />
+            </SubMenu>
+
+            <Item
+              title="Payment and Invoice"
+              to="/payments"
+              icon={<PaymentsIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
             <Item
               title="Calendar"
               to="/calendar"

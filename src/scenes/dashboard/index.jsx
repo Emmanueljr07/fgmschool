@@ -1,12 +1,9 @@
-import { Box, IconButton, Typography, useTheme } from "@mui/material";
+import { Box, useTheme } from "@mui/material";
 import Header from "../../Components/Header";
 import { tokens } from "../../theme";
-import DownloadOutlinedIcon from "@mui/icons-material/DownloadOutlined";
 import SchoolIcon from "@mui/icons-material/School";
 import GroupIcon from "@mui/icons-material/Group";
 import ClassIcon from "@mui/icons-material/Class";
-import LineChart from "../../Components/LineChart";
-import BarChart from "../../Components/BarChart";
 import StatBox from "../../Components/StatBox";
 
 const Dashboard = () => {
@@ -87,7 +84,7 @@ const Dashboard = () => {
         </Box>
 
         {/* ROW 2 */}
-        <Box
+        {/* <Box
           gridColumn="span 12"
           gridRow="span 2"
           backgroundColor={colors.primary[400]}
@@ -121,11 +118,11 @@ const Dashboard = () => {
           <Box height="230px" mt="-40px">
             <LineChart isDashboard={true} />
           </Box>
-        </Box>
+        </Box> */}
 
         {/* ROW 3 */}
 
-        <Box
+        {/* <Box
           gridColumn="span 12"
           gridRow="span 2"
           backgroundColor={colors.primary[400]}
@@ -141,7 +138,7 @@ const Dashboard = () => {
           <Box height="250px" mt="-20px">
             <BarChart isDashboard={true} />
           </Box>
-        </Box>
+        </Box> */}
 
         {/*  */}
       </Box>

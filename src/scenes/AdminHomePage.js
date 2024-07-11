@@ -17,6 +17,7 @@ import NoticeBoard from "./noticeboard";
 import Class from "./class";
 import Staffs from "./staffs";
 import AddStaff from "./staffs/AddStaff";
+import Subject from "./subject/index.jsx";
 
 const AdminHomePage = () => {
   const [theme, colorMode] = useMode();
@@ -31,19 +32,21 @@ const AdminHomePage = () => {
             <Routes>
               <Route path="/" exact element={<Navigate to="/dashboard" />} />
 
-              <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="/team" element={<Team />} />
-              <Route path="/students" element={<Students />} />
-              <Route path="/teachers" element={<Teachers />} />
-              <Route path="/parents" element={<Parents />} />
-              <Route path="/staffs" element={<Staffs />} />
-              <Route path="/class" element={<Class />} />
-              <Route path="/calendar" element={<Calendar />} />
-              <Route path="/notice" element={<NoticeBoard />} />
-              <Route path="/addstudent" element={<AddStudent />} />
-              <Route path="/addparent" element={<AddParent />} />
-              <Route path="/addteacher" element={<AddTeacher />} />
-              <Route path="/addstaff" element={<AddStaff />} />
+              <Route exact path="/dashboard" element={<Dashboard />} />
+              <Route exact path="/team" element={<Team />} />
+              <Route exact path="/students" element={<Students />} />
+              <Route exact path="/teachers" element={<Teachers />} />
+              <Route exact path="/parents" element={<Parents />} />
+              <Route exact path="/staffs" element={<Staffs />} />
+              <Route exact path="/class" element={<Class />} />
+              <Route exact path="/calendar" element={<Calendar />} />
+              <Route exact path="/notice" element={<NoticeBoard />} />
+              <Route exact path="/addstudent" element={<AddStudent />} />
+              <Route exact path="/addparent" element={<AddParent />} />
+              <Route exact path="/addteacher" element={<AddTeacher />} />
+              <Route exact path="/addstaff" element={<AddStaff />} />
+              <Route exact path="/subjects" element={<Subject />} />
+
               {/* <Route path="/createclass" element={<CreateClass />} /> */}
             </Routes>
           </main>
