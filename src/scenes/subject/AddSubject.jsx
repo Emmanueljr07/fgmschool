@@ -8,6 +8,7 @@ import {
   DialogTitle,
   IconButton,
   TextField,
+  MenuItem,
   Box,
 } from "@mui/material";
 import React from "react";
@@ -16,10 +17,11 @@ import { Send } from "@mui/icons-material";
 import { useValue } from "../../context/ContextProvider";
 
 const initialValues = {
-  name: "",
+  subject: "",
+  class: "",
 };
 
-const CreateClass = () => {
+const AddSubject = () => {
   const {
     state: { openDialog },
     dispatch,
@@ -36,7 +38,7 @@ const CreateClass = () => {
   };
 
   return (
-    <Box sx={{}}>
+    <Box>
       <Dialog
         open={openDialog}
         onClose={closeDialog}
@@ -44,7 +46,7 @@ const CreateClass = () => {
         maxWidth={"xs"}
       >
         <DialogTitle>
-          Create New Class
+          Add New Subject
           <IconButton
             sx={{
               position: "absolute",
@@ -61,29 +63,42 @@ const CreateClass = () => {
           {(props) => (
             <Form>
               <DialogContent>
-                <DialogContentText>Enter the Name</DialogContentText>
+                <DialogContentText>
+                  Please fill in subject details below:
+                </DialogContentText>
                 <TextField
-                  autoFocus
                   margin="normal"
                   variant="standard"
                   type="text"
-                  label="Name"
+                  label="Enter the Subject"
                   fullWidth
                   onBlur={props.handleBlur}
                   onChange={props.handleChange}
-                  value={props.values.name}
-                  name="name"
+                  value={props.values.subject}
+                  name="subject"
                   required
-                  inputMode={{ minLength: 3 }}
+                  //   inputMode={{minLength:2}}
+                  sx={{}}
                 />
+                <TextField
+                  margin="normal"
+                  variant="standard"
+                  select
+                  label="Select class"
+                  fullWidth
+                  onBlur={props.handleBlur}
+                  onChange={props.handleChange}
+                  value={props.values.class}
+                  name="class"
+                  required
+                  sx={{}}
+                >
+                  <MenuItem value="1">Form 1</MenuItem>
+                  <MenuItem value="2">Form 2</MenuItem>
+                </TextField>
               </DialogContent>
               <DialogActions>
-                <Button
-                  type="submit"
-                  variant="contained"
-                  endIcon={<Send />}
-                  sx={{ m: "20px" }}
-                >
+                <Button type="submit" variant="contained" endIcon={<Send />}>
                   Submit
                 </Button>
               </DialogActions>
@@ -95,4 +110,4 @@ const CreateClass = () => {
   );
 };
 
-export default CreateClass;
+export default AddSubject;

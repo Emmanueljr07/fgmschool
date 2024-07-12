@@ -44,7 +44,6 @@ const Class = () => {
         return (
           <Box
             sx={{
-              // backgroundColor: "whitesmoke",
               width: "100%",
               height: "100%",
               display: "flex",
@@ -66,9 +65,9 @@ const Class = () => {
 
   return (
     <>
-      <>{<CreateClass />}</>
+      <CreateClass />
       <Box m="20px">
-        <Header title="Classess" subtitle="List of all the classess" />
+        <Header title="Class" subtitle="List of all the classes" />
         <Button
           sx={{
             backgroundColor: colors.blueAccent[700],
@@ -76,7 +75,7 @@ const Class = () => {
             fontSize: "18px",
             padding: "6px 10px",
           }}
-          onClick={() => dispatch({ type: "OPEN_CREATE_CLASS" })}
+          onClick={() => dispatch({ type: "OPEN_DIALOG" })}
         >
           <AddCircleIcon sx={{ mr: "10px" }} />
           Create Class

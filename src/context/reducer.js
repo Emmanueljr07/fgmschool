@@ -1,25 +1,14 @@
 const reducer = (state, action) => {
   switch (action.type) {
-    case "OPEN_ADD_MEMBER":
+    case "OPEN_DIALOG":
       return {
         ...state,
-        openAddMember: true,
+        openDialog: true,
       };
-    case "CLOSE_ADD_MEMBER":
+    case "CLOSE_DIALOG":
       return {
         ...state,
-        openAddMember: false,
-      };
-
-    case "OPEN_CREATE_CLASS":
-      return {
-        ...state,
-        openCreateClass: true,
-      };
-    case "CLOSE_CREATE_CLASS":
-      return {
-        ...state,
-        openCreateClass: false,
+        openDialog: false,
       };
 
     case "START_LOADING":

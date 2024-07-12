@@ -26,12 +26,12 @@ const initialValues = {
 
 const AddMember = () => {
   const {
-    state: { openAddMember },
+    state: { openDialog },
     dispatch,
   } = useValue();
 
   const closeDialog = () => {
-    dispatch({ type: "CLOSE_ADD_MEMBER" });
+    dispatch({ type: "CLOSE_DIALOG" });
   };
 
   const handleSubmit = (formValues, { resetForm }) => {
@@ -51,7 +51,7 @@ const AddMember = () => {
   };
 
   return (
-    <Dialog open={openAddMember} onClose={closeDialog}>
+    <Dialog open={openDialog} onClose={closeDialog}>
       <DialogTitle>
         Add Member
         <IconButton

@@ -93,7 +93,6 @@ const Team = () => {
         return (
           <Box
             sx={{
-              // backgroundColor: "whitesmoke",
               width: "100%",
               height: "100%",
               display: "flex",
@@ -129,7 +128,7 @@ const Team = () => {
                 fontWeight: "bold",
                 padding: "10px 20px",
               }}
-              onClick={() => dispatch({ type: "OPEN_ADD_MEMBER" })}
+              onClick={() => dispatch({ type: "OPEN_DIALOG" })}
             >
               <PersonAddIcon sx={{ mr: "10px" }} />
               Add Member

@@ -159,16 +159,9 @@ const MySidebar = () => {
 
             <SubMenu label="Class" icon={<Diversity2Icon />}>
               <Item
-                title="View All Classes"
+                title="Manage Classes"
                 to="/class"
                 icon={<ReceiptOutlinedIcon />}
-                selected={selected}
-                setSelected={setSelected}
-              />
-              <Item
-                title="Add Class"
-                to="/createclass"
-                icon={<PersonAddIcon />}
                 selected={selected}
                 setSelected={setSelected}
               />

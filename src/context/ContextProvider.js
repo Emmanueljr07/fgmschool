@@ -4,7 +4,7 @@ import reducer from "./reducer";
 const initialState = {
   currentUser: null,
   openAddMember: false,
-  openCreateClass: false,
+  openDialog: false,
   loading: false,
   alert: { open: false, severity: "info", message: "" },
 };
