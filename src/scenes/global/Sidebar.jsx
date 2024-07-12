@@ -202,7 +202,7 @@ const MySidebar = () => {
 
             <Item
               title="Payment and Invoice"
-              to="/payments"
+              to="/fees"
               icon={<PaymentsIcon />}
               selected={selected}
               setSelected={setSelected}

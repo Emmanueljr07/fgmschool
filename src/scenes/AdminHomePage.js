@@ -18,6 +18,7 @@ import Class from "./class";
 import Staffs from "./staffs";
 import AddStaff from "./staffs/AddStaff";
 import Subject from "./subject/index.jsx";
+import ManageFees from "./fees/manageFees.jsx";
 
 const AdminHomePage = () => {
   const [theme, colorMode] = useMode();
@@ -46,6 +47,7 @@ const AdminHomePage = () => {
               <Route exact path="/addteacher" element={<AddTeacher />} />
               <Route exact path="/addstaff" element={<AddStaff />} />
               <Route exact path="/subjects" element={<Subject />} />
+              <Route exact path="/fees" element={<ManageFees />} />
 
               {/* <Route path="/createclass" element={<CreateClass />} /> */}
             </Routes>
