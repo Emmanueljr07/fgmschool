@@ -1,14 +1,17 @@
-import { Box, Typography, useTheme, IconButton } from "@mui/material";
-import { DataGrid } from "@mui/x-data-grid";
+import { Box, useTheme, IconButton, Button } from "@mui/material";
+import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import { tokens } from "../../theme";
 import { mockDataInvoices } from "../../data/mockData";
 import Header from "../../Components/Header";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
-
+import CreateClass from "./createclass";
+import AddCircleIcon from "@mui/icons-material/AddCircle";
+import { useValue } from "../../context/ContextProvider";
 const Class = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+  const { dispatch } = useValue();
 
   const onEditButtonClick = (e, row) => {
     e.stopPropagation();
@@ -22,22 +25,15 @@ const Class = () => {
   };
 
   const columns = [
-    { field: "id", headerName: "ID" },
+    { field: "id", headerName: "ID", width: 80, flex: 0.2, minWidth: 80 },
     {
       field: "name",
-      headerName: "Name",
-      flex: 1,
+      headerName: "Class",
+      flex: 0.5,
+      minWidth: 150,
+      width: 180,
       cellClassName: "name-column--cell",
     },
-    { field: "phone", headerName: "Phone Number", flex: 1 },
-    { field: "email", headerName: "Email", flex: 1 },
-    {
-      field: "cost",
-      headerName: "Cost",
-      flex: 1,
-      renderCell: (params) => <Typography>${params.row.cost}</Typography>,
-    },
-    { field: "date", headerName: "Date", flex: 1 },
     {
       field: "actions",
       headerName: "",
@@ -69,46 +65,60 @@ const Class = () => {
   ];
 
   return (
-    <Box m="20px">
-      <Header title="Classess" subtitle="List of all the classess" />
-      <Box
-        m="40px 0 0 0"
-        height="150vh"
-        sx={{
-          "& .MuiDataGrid-root": {
-            borderTop: "none",
-            borderRight: "none",
-            borderLeft: "none",
-            borderBottom: "none",
-          },
-          "& .MuiDataGrid-cell": {
-            borderTop: "none",
-            borderRight: "none",
-            borderLeft: "none",
-            borderBottom: "none",
-          },
-          "& .name-column--cell": {
-            color: colors.greenAccent[300],
-          },
-          "& .MuiDataGrid-columnHeader": {
+    <>
+      <>{<CreateClass />}</>
+      <Box m="20px">
+        <Header title="Classess" subtitle="List of all the classess" />
+        <Button
+          sx={{
             backgroundColor: colors.blueAccent[700],
-            borderBottom: "none",
-          },
-          "& .MuiDataGrid-virtualScroller": {
-            backgroundColor: colors.primary[400],
-          },
-          "& .MuiDataGrid-footerContainer": {
-            borderTop: "none",
-            backgroundColor: colors.blueAccent[700],
-          },
-          "& .MuiCheckbox-root": {
-            color: `${colors.greenAccent[200]} !important`,
-          },
-        }}
-      >
-        <DataGrid checkboxSelection rows={mockDataInvoices} columns={columns} />
+            color: colors.grey[100],
+            fontSize: "18px",
+            padding: "6px 10px",
+          }}
+          onClick={() => dispatch({ type: "OPEN_CREATE_CLASS" })}
+        >
+          <AddCircleIcon sx={{ mr: "10px" }} />
+          Create Class
+        </Button>
+        <Box
+          m="40px 0 0 0"
+          height="100vh"
+          sx={{
+            "& .MuiDataGrid-root": {
+              border: "none",
+            },
+            "& .MuiDataGrid-cell": {
+              border: "none",
+            },
+            "& .name-column--cell": {
+              color: colors.greenAccent[300],
+            },
+            "& .MuiDataGrid-columnHeader": {
+              backgroundColor: colors.blueAccent[700],
+              borderBottom: "none",
+            },
+            "& .MuiDataGrid-virtualScroller": {
+              backgroundColor: colors.primary[400],
+            },
+            "& .MuiDataGrid-footerContainer": {
+              borderTop: "none",
+              backgroundColor: colors.blueAccent[700],
+            },
+            "& .MuiDataGrid-toolbarContainer .MuiButton-text": {
+              color: `${colors.grey[100]} !important`,
+              margin: "10px 0",
+            },
+          }}
+        >
+          <DataGrid
+            rows={mockDataInvoices}
+            columns={columns}
+            slots={{ toolbar: GridToolbar }}
+          />
+        </Box>
       </Box>
-    </Box>
+    </>
   );
 };
 

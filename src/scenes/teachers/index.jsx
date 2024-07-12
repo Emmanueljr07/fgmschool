@@ -1,5 +1,5 @@
 import { Box, Typography, useTheme, IconButton } from "@mui/material";
-import { DataGrid } from "@mui/x-data-grid";
+import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import { tokens } from "../../theme";
 import { mockDataInvoices } from "../../data/mockData";
 import Header from "../../Components/Header";
@@ -25,19 +25,32 @@ const Teachers = () => {
     { field: "id", headerName: "ID" },
     {
       field: "name",
-      headerName: "Name",
+      headerName: "Full Name",
+      minWidth: 150,
       flex: 1,
       cellClassName: "name-column--cell",
     },
-    { field: "phone", headerName: "Phone Number", flex: 1 },
-    { field: "email", headerName: "Email", flex: 1 },
+    { field: "phone", headerName: "Phone Number", minWidth: 150, flex: 1 },
+    { field: "email", headerName: "Email", minWidth: 180, flex: 1 },
     {
       field: "cost",
-      headerName: "Cost",
+      headerName: "Subjects",
+      minWidth: 100,
       flex: 1,
-      renderCell: (params) => <Typography>${params.row.cost}</Typography>,
+      renderCell: (params) => (
+        <Typography sx={{ mt: "15px" }}>{params.row.cost}</Typography>
+      ),
     },
-    { field: "date", headerName: "Date", flex: 1 },
+    {
+      field: "gender",
+      headerName: "Gender",
+      minWidth: 100,
+      flex: 1,
+      renderCell: (params) => (
+        <Typography sx={{ mt: "15px" }}>{"Male"}</Typography>
+      ),
+    },
+    { field: "date", headerName: "Age", minWidth: 80, flex: 1 },
     {
       field: "actions",
       headerName: "",
@@ -76,16 +89,10 @@ const Teachers = () => {
         height="150vh"
         sx={{
           "& .MuiDataGrid-root": {
-            borderTop: "none",
-            borderRight: "none",
-            borderLeft: "none",
-            borderBottom: "none",
+            border: "none",
           },
           "& .MuiDataGrid-cell": {
-            borderTop: "none",
-            borderRight: "none",
-            borderLeft: "none",
-            borderBottom: "none",
+            border: "none",
           },
           "& .name-column--cell": {
             color: colors.greenAccent[300],
@@ -101,12 +108,16 @@ const Teachers = () => {
             borderTop: "none",
             backgroundColor: colors.blueAccent[700],
           },
-          "& .MuiCheckbox-root": {
-            color: `${colors.greenAccent[200]} !important`,
+          "& .MuiDataGrid-toolbarContainer .MuiButton-text": {
+            color: `${colors.grey[100]} !important`,
           },
         }}
       >
-        <DataGrid checkboxSelection rows={mockDataInvoices} columns={columns} />
+        <DataGrid
+          rows={mockDataInvoices}
+          columns={columns}
+          slots={{ toolbar: GridToolbar }}
+        />
       </Box>
     </Box>
   );

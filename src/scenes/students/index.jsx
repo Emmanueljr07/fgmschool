@@ -23,7 +23,6 @@ const Students = () => {
 
   const columns = [
     { field: "id", headerName: "ID" },
-    // { field: "registrarId", headerName: "First Name" },
     {
       field: "name",
       headerName: "Name", //Apppend First and last Name

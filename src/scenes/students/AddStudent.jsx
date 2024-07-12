@@ -12,11 +12,9 @@ import { useState } from "react";
 const initialValues = {
   firstName: "",
   lastName: "",
-  parent: "",
   class: "",
   gender: "",
-  email: "",
-  password: "",
+  parentName: "",
   contact: "",
   address: "",
 };
@@ -27,11 +25,9 @@ const phoneRegExp =
 const studentSchema = yup.object().shape({
   firstName: yup.string().required("required"),
   lastName: yup.string().required("required"),
-  parent: yup.string().required("required"),
   class: yup.string().required("required"),
   gender: yup.string().oneOf(["male", "female"]).required("Required"),
-  email: yup.string().email("invalid email").required("required"),
-  password: yup.string().required("required"),
+  parentName: yup.string().required("required"),
   contact: yup
     .string()
     .matches(phoneRegExp, "Phone number is not valid")
@@ -101,22 +97,6 @@ const AddStudent = () => {
                 fullWidth
                 variant="filled"
                 select
-                label="Select Parent"
-                name="parent"
-                onBlur={props.handleBlur}
-                onChange={props.handleChange}
-                value={props.values.parent}
-                error={!!props.touched.parent && !!props.errors.parent}
-                helperText={props.touched.parent && props.errors.parent}
-                sx={{ gridColumn: "span 2" }}
-              >
-                <MenuItem value="father">Father</MenuItem>
-              </TextField>
-
-              <TextField
-                fullWidth
-                variant="filled"
-                select
                 label="Class"
                 name="class"
                 onBlur={props.handleBlur}
@@ -151,7 +131,7 @@ const AddStudent = () => {
                 <DatePicker
                   disableFuture
                   views={["day", "month", "year"]}
-                  sx={{ gridColumn: "span 2" }}
+                  sx={{ gridColumn: "span 4" }}
                   fullWidth
                   format="DD/MM/YYYY"
                   variant="filled"
@@ -176,26 +156,13 @@ const AddStudent = () => {
                 fullWidth
                 variant="filled"
                 type="text"
-                label="email"
+                label="Parent Name"
                 onBlur={props.handleBlur}
                 onChange={props.handleChange}
-                value={props.values.email}
-                name="email"
-                error={!!props.touched.email && !!props.errors.email}
-                helperText={props.touched.email && props.errors.email}
-                sx={{ gridColumn: "span 4" }}
-              />
-              <TextField
-                fullWidth
-                variant="filled"
-                type="password"
-                label="Password"
-                onBlur={props.handleBlur}
-                onChange={props.handleChange}
-                value={props.values.password}
-                name="password"
-                error={!!props.touched.password && !!props.errors.password}
-                helperText={props.touched.password && props.errors.password}
+                value={props.values.parentName}
+                name="parentName"
+                error={!!props.touched.parentName && !!props.errors.parentName}
+                helperText={props.touched.parentName && props.errors.parentName}
                 sx={{ gridColumn: "span 4" }}
               />
               <TextField

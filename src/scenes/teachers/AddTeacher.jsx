@@ -5,9 +5,10 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import Header from "../../Components/Header";
 
 const initialValues = {
-  firstName: "",
-  lastName: "",
+  fullName: "",
+  subject: "",
   gender: "",
+  age: null,
   email: "",
   password: "",
   contact: "",
@@ -18,8 +19,8 @@ const phoneRegExp =
   /^((\+[1-9]{1-4}[ -]?|)(\([0-9]{2-3}\)[ -]?)|([0-9]{2,4})[ -]?)*?[0-9]{3,4}[ -]?[0-9]{3,4}$/;
 
 const teacherSchema = yup.object().shape({
-  firstName: yup.string().required("required"),
-  lastName: yup.string().required("required"),
+  fullName: yup.string().required("required"),
+  subject: yup.string().required("required"),
   gender: yup.string().oneOf(["male", "female"]).required("Required"),
   email: yup.string().email("invalid email").required("required"),
   password: yup.string().required("required"),
@@ -61,28 +62,31 @@ const AddTeacher = () => {
                 fullWidth
                 variant="filled"
                 type="text"
-                label="First Name"
+                label="Full Name"
                 onBlur={props.handleBlur}
                 onChange={props.handleChange}
-                value={props.values.firstName}
-                name="firstName"
-                error={!!props.touched.firstName && !!props.errors.firstName}
-                helperText={props.touched.firstName && props.errors.firstName}
-                sx={{ gridColumn: "span 2" }}
+                value={props.values.fullName}
+                name="fullName"
+                error={!!props.touched.fullName && !!props.errors.fullName}
+                helperText={props.touched.fullName && props.errors.fullName}
+                sx={{ gridColumn: "span 4" }}
               />
               <TextField
                 fullWidth
                 variant="filled"
-                type="text"
-                label="Last Name"
+                select
+                label="Select Subject"
                 onBlur={props.handleBlur}
                 onChange={props.handleChange}
-                value={props.values.lastName}
-                name="lastName"
-                error={!!props.touched.lastName && !!props.errors.lastName}
-                helperText={props.touched.lastName && props.errors.lastName}
+                value={props.values.subject}
+                name="subject"
+                error={!!props.touched.subject && !!props.errors.subject}
+                helperText={props.touched.subject && props.errors.subject}
                 sx={{ gridColumn: "span 2" }}
-              />
+              >
+                <MenuItem value="maths">Mathematics</MenuItem>
+                <MenuItem value="eng">English</MenuItem>
+              </TextField>
 
               <TextField
                 fullWidth
@@ -95,12 +99,25 @@ const AddTeacher = () => {
                 value={props.values.gender}
                 error={!!props.touched.gender && !!props.errors.gender}
                 helperText={props.touched.gender && props.errors.gender}
-                sx={{ gridColumn: "span 4" }}
+                sx={{ gridColumn: "span 2" }}
               >
                 <MenuItem value="male">Male</MenuItem>
                 <MenuItem value="female">Female</MenuItem>
               </TextField>
 
+              <TextField
+                fullWidth
+                variant="filled"
+                type="number"
+                label="Age"
+                onBlur={props.handleBlur}
+                onChange={props.handleChange}
+                value={props.values.age}
+                name="age"
+                error={!!props.touched.age && !!props.errors.age}
+                helperText={props.touched.age && props.errors.age}
+                sx={{ gridColumn: "span 4" }}
+              />
               <TextField
                 fullWidth
                 variant="filled"

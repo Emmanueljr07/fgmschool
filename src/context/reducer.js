@@ -11,6 +11,17 @@ const reducer = (state, action) => {
         openAddMember: false,
       };
 
+    case "OPEN_CREATE_CLASS":
+      return {
+        ...state,
+        openCreateClass: true,
+      };
+    case "CLOSE_CREATE_CLASS":
+      return {
+        ...state,
+        openCreateClass: false,
+      };
+
     case "START_LOADING":
       return {
         ...state,
