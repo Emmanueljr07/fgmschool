@@ -6,6 +6,7 @@ import Header from "../../Components/Header";
 
 const initialValues = {
   fullName: "",
+  class: "",
   subject: "",
   gender: "",
   age: null,
@@ -75,6 +76,22 @@ const AddTeacher = () => {
                 fullWidth
                 variant="filled"
                 select
+                label="Select Class"
+                onBlur={props.handleBlur}
+                onChange={props.handleChange}
+                value={props.values.class}
+                name="class"
+                error={!!props.touched.class && !!props.errors.class}
+                helperText={props.touched.class && props.errors.class}
+                sx={{ gridColumn: "span 2" }}
+              >
+                <MenuItem value="form 1">Mathematics</MenuItem>
+                <MenuItem value="form 2">English</MenuItem>
+              </TextField>
+              <TextField
+                fullWidth
+                variant="filled"
+                select
                 label="Select Subject"
                 onBlur={props.handleBlur}
                 onChange={props.handleChange}
@@ -116,7 +133,7 @@ const AddTeacher = () => {
                 name="age"
                 error={!!props.touched.age && !!props.errors.age}
                 helperText={props.touched.age && props.errors.age}
-                sx={{ gridColumn: "span 4" }}
+                sx={{ gridColumn: "span 2" }}
               />
               <TextField
                 fullWidth
