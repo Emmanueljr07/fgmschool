@@ -19,6 +19,7 @@ import Staffs from "./staffs";
 import AddStaff from "./staffs/AddStaff";
 import Subject from "./subject/index.jsx";
 import ManageFees from "./fees/manageFees.jsx";
+import ManageMarks from "./exam/ManageMarks.jsx";
 
 const AdminHomePage = () => {
   const [theme, colorMode] = useMode();
@@ -48,8 +49,7 @@ const AdminHomePage = () => {
               <Route exact path="/addstaff" element={<AddStaff />} />
               <Route exact path="/subjects" element={<Subject />} />
               <Route exact path="/fees" element={<ManageFees />} />
-
-              {/* <Route path="/createclass" element={<CreateClass />} /> */}
+              <Route exact path="/managemarks" element={<ManageMarks />} />
             </Routes>
           </main>
         </div>

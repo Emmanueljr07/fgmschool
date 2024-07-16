@@ -193,7 +193,7 @@ const MySidebar = () => {
               />
               <Item
                 title="Manage Marks"
-                to="/studentmarks"
+                to="/managemarks"
                 icon={<GradeIcon />}
                 selected={selected}
                 setSelected={setSelected}
