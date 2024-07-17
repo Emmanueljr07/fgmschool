@@ -5,6 +5,8 @@ import {
   Tabs,
   Tab,
   Typography,
+  TextField,
+  Button,
 } from "@mui/material";
 import PropTypes from "prop-types";
 import React from "react";
@@ -15,6 +17,16 @@ import { mockDataInvoices } from "../../data/mockData";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import AddCircle from "@mui/icons-material/AddCircle";
+import { Form, Formik } from "formik";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import { useState } from "react";
+import dayjs from "dayjs";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+
+const initialValues = {
+  examName: "",
+};
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -49,7 +61,16 @@ const ExamList = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
-  const [Tabvalue, setTabValue] = React.useState(0);
+  const handleFormSubmit = (formValues, { resetForm }) => {
+    console.log(formValues);
+    console.log(dob);
+    resetForm();
+    setDob(dayjs(""));
+  };
+
+  const [dob, setDob] = useState(dayjs(""));
+
+  const [Tabvalue, setTabValue] = useState(0);
 
   const handleTabChange = (event, newValue) => {
     setTabValue(newValue);
@@ -106,7 +127,16 @@ const ExamList = () => {
     <Box m="20px">
       <Header title="Manage All the Exam" subtitle="List of all the exams" />
       <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-        <Tabs value={Tabvalue} onChange={handleTabChange}>
+        <Tabs
+          value={Tabvalue}
+          onChange={handleTabChange}
+          TabIndicatorProps={{
+            style: {
+              //   backgroundColor: "#D97D54",
+              backgroundColor: `${colors.blueAccent[700]}`,
+            },
+          }}
+        >
           <Tab label="Exam List" {...a11yProps(0)} />
           <Tab
             {...a11yProps(1)}
@@ -129,6 +159,57 @@ const ExamList = () => {
         <Typography variant="h4" color={colors.grey[100]} sx={{ mb: "5px" }}>
           Create New Exam
         </Typography>
+        <Formik onSubmit={handleFormSubmit} initialValues={initialValues}>
+          {(props) => (
+            <Form>
+              <Box
+                display="flex"
+                flexDirection="column"
+                gap="19px"
+                width="400px"
+              >
+                <TextField
+                  autoFocus
+                  margin="normal"
+                  variant="filled"
+                  type="text"
+                  label="Exam Name"
+                  onBlur={props.handleBlur}
+                  onChange={props.handleChange}
+                  value={props.values.examName}
+                  name="examName"
+                  required
+                  inputMode={{ minLength: 5 }}
+                />
+                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                  <DatePicker
+                    views={["day", "month", "year"]}
+                    format="DD/MM/YYYY"
+                    variant="filled"
+                    label="Date of Birth"
+                    onBlur={props.handleBlur}
+                    onChange={(newValue) => {
+                      console.log(newValue);
+                      setDob(newValue);
+                    }}
+                    value={dob}
+                    name="dob"
+                    slotProps={{
+                      textField: {
+                        required: true,
+                      },
+                    }}
+                  />
+                </LocalizationProvider>
+                <Box display="flex" justifyContent="end" mt="20px">
+                  <Button type="submit" color="secondary" variant="contained">
+                    Create New Exam
+                  </Button>
+                </Box>
+              </Box>
+            </Form>
+          )}
+        </Formik>
       </CustomTabPanel>
     </Box>
   );
