@@ -20,6 +20,7 @@ import AddStaff from "./staffs/AddStaff";
 import Subject from "./subject/index.jsx";
 import ManageFees from "./fees/manageFees.jsx";
 import ManageMarks from "./exam/ManageMarks.jsx";
+import ExamList from "./exam/ExamList.jsx";
 
 const AdminHomePage = () => {
   const [theme, colorMode] = useMode();
@@ -50,6 +51,7 @@ const AdminHomePage = () => {
               <Route exact path="/subjects" element={<Subject />} />
               <Route exact path="/fees" element={<ManageFees />} />
               <Route exact path="/managemarks" element={<ManageMarks />} />
+              <Route exact path="/exams" element={<ExamList />} />
             </Routes>
           </main>
         </div>
