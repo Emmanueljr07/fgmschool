@@ -24,7 +24,6 @@ import SubjectIcon from "@mui/icons-material/Subject";
 import LibraryBooksIcon from "@mui/icons-material/LibraryBooks";
 import TokenIcon from "@mui/icons-material/Token";
 import QuizIcon from "@mui/icons-material/Quiz";
-import GradingIcon from "@mui/icons-material/Grading";
 import GradeIcon from "@mui/icons-material/Grade";
 import PaymentsIcon from "@mui/icons-material/Payments";
 
@@ -184,13 +183,13 @@ const MySidebar = () => {
                 selected={selected}
                 setSelected={setSelected}
               />
-              <Item
+              {/* <Item
                 title="Exam Grades"
                 to="/grades"
                 icon={<GradingIcon />}
                 selected={selected}
                 setSelected={setSelected}
-              />
+              /> */}
               <Item
                 title="Manage Marks"
                 to="/managemarks"

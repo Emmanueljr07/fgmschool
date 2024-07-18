@@ -1,25 +1,14 @@
-import { Box, IconButton } from "@mui/material";
+import { Box } from "@mui/material";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import { tokens } from "../../theme";
 import { mockDataContacts } from "../../data/mockData";
 import Header from "../../Components/Header";
 import { useTheme } from "@mui/material";
-import EditIcon from "@mui/icons-material/Edit";
-import DeleteIcon from "@mui/icons-material/Delete";
+import StudentActions from "./StudentActions";
 
 const Students = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-  const onEditButtonClick = (e, row) => {
-    e.stopPropagation();
-    console.log(row);
-    //do whatever you want with the row
-  };
-  const onDeleteButtonClick = (e, row) => {
-    e.stopPropagation();
-    console.log(row.id);
-    //do whatever you want with the row
-  };
 
   const columns = [
     { field: "id", headerName: "ID" },
@@ -49,26 +38,7 @@ const Students = () => {
       width: 120,
       sortable: false,
       disableColumnMenu: true,
-      renderCell: (params) => {
-        return (
-          <Box
-            sx={{
-              width: "100%",
-              height: "100%",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            <IconButton onClick={(e) => onEditButtonClick(e, params.row)}>
-              <EditIcon />
-            </IconButton>
-            <IconButton onClick={(e) => onDeleteButtonClick(e, params.row)}>
-              <DeleteIcon />
-            </IconButton>
-          </Box>
-        );
-      },
+      renderCell: (params) => <StudentActions {...{ params }} />,
     },
     // { field: "address", headerName: "Address", minWidth: 220 },
   ];
