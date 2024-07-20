@@ -7,6 +7,7 @@ const initialState = {
   openDialog: false,
   loading: false,
   alert: { open: false, severity: "info", message: "" },
+  viewStudent: null,
 };
 
 const Context = createContext(initialState);

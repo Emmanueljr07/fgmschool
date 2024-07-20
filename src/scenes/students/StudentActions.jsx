@@ -1,14 +1,15 @@
 import { Check, Delete, Edit, Preview } from "@mui/icons-material";
 import { Box, CircularProgress, IconButton, Tooltip } from "@mui/material";
 import React, { useEffect, useState } from "react";
-// import { useValue } from "../../context/ContextProvider";
+import { useValue } from "../../context/ContextProvider";
 import { green } from "@mui/material/colors";
+import StudentCard from "./StudentCard";
 
 const StudentActions = ({ params, rowId, setRowId }) => {
-  // const {
-  //   dispatch,
-  //   state: { currentUser, students },
-  // } = useValue();
+  const {
+    dispatch,
+    // state: { currentUser, students },
+  } = useValue();
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
 
@@ -35,49 +36,54 @@ const StudentActions = ({ params, rowId, setRowId }) => {
 
   const handleDelete = () => {};
 
-  const handlePreview = () => {};
+  const handlePreview = () => {
+    dispatch({ type: "VIEW_STUDENT", payload: params.row });
+  };
 
   useEffect(() => {
     if (rowId === params.id && success) setSuccess(false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [rowId]);
   return (
-    <Box>
-      <Tooltip title="View student details">
-        <IconButton onClick={handlePreview}>
-          <Preview />
-        </IconButton>
-      </Tooltip>
-      {success ? (
-        <IconButton>
-          <Check />
-        </IconButton>
-      ) : (
-        <IconButton
-          onClick={handleEdit}
-          disabled={params.id !== rowId || loading}
-        >
-          <Edit />
-        </IconButton>
-      )}
-      {loading && (
-        <CircularProgress
-          size={52}
-          sx={{
-            color: green[500],
-            position: "absolute",
-            top: -6,
-            left: -6,
-            zIndex: 1,
-          }}
-        />
-      )}
-      <Tooltip title="Delete this student">
-        <IconButton onClick={handleDelete}>
-          <Delete />
-        </IconButton>
-      </Tooltip>
-    </Box>
+    <>
+      <StudentCard />
+      <Box>
+        <Tooltip title="View student details">
+          <IconButton onClick={handlePreview}>
+            <Preview />
+          </IconButton>
+        </Tooltip>
+        {success ? (
+          <IconButton>
+            <Check />
+          </IconButton>
+        ) : (
+          <IconButton
+            onClick={handleEdit}
+            disabled={params.id !== rowId || loading}
+          >
+            <Edit />
+          </IconButton>
+        )}
+        {loading && (
+          <CircularProgress
+            size={52}
+            sx={{
+              color: green[500],
+              position: "absolute",
+              top: -6,
+              left: -6,
+              zIndex: 1,
+            }}
+          />
+        )}
+        <Tooltip title="Delete this student">
+          <IconButton onClick={handleDelete}>
+            <Delete />
+          </IconButton>
+        </Tooltip>
+      </Box>
+    </>
   );
 };
 

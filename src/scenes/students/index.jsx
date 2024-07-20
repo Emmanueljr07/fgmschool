@@ -129,7 +129,7 @@ const Students = () => {
                 theme.palette.mode === "light" ? grey[200] : grey[900],
             },
           }}
-          onCellEditCommit={(params) => setRowId(params.id)}
+          processRowUpdate={(params) => setRowId(params.id)}
           slots={{ toolbar: GridToolbar }}
         />
       </Box>

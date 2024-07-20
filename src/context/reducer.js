@@ -35,6 +35,12 @@ const reducer = (state, action) => {
         currentUser: action.payload,
       };
 
+    case "VIEW_STUDENT":
+      return {
+        ...state,
+        viewStudent: action.payload,
+      };
+
     default:
       throw new Error("No matched action!");
   }
