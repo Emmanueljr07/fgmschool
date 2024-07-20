@@ -8,6 +8,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 import DataTable from "react-data-table-component";
+import CloseIcon from "@mui/icons-material/Close";
 
 const ExamOptions = [
   "First Sequence",
@@ -51,6 +52,8 @@ const ManageMarks = () => {
   // eslint-disable-next-line no-mixed-operators
   const [tabledata, setTabledata] = useState(mockDataInvoices);
 
+  const [cancelFilter, setCancelFilter] = useState(false);
+
   const FilterTable = (e) => {
     const newData = mockDataInvoices.filter((row) => {
       return (
@@ -63,6 +66,12 @@ const ManageMarks = () => {
       );
     });
     setTabledata(newData);
+    setCancelFilter(true);
+  };
+
+  const closeFilter = (e) => {
+    setTabledata(mockDataInvoices);
+    setCancelFilter(false);
   };
 
   const onEditButtonClick = (e, row) => {
@@ -175,7 +184,12 @@ const ManageMarks = () => {
           onClick={FilterTable}
         >
           Search
-        </Button>
+        </Button>{" "}
+        {cancelFilter ? (
+          <IconButton onClick={closeFilter}>
+            <CloseIcon sx={{ fontSize: 40 }} />
+          </IconButton>
+        ) : null}
       </Box>
       <div style={{ height: 500, width: "100%" }}>
         <Box
@@ -211,20 +225,9 @@ const ManageMarks = () => {
             data={tabledata}
             fixedHeader
             pagination
-            // theme={theme.palette.mode}
-            actions={<Button> Export Pdf</Button>}
-            // customStyles={customStyles}
+            // actions={<Button> Export Pdf</Button>}
           ></DataTable>
         </Box>
-        {/* <DataGrid
-          columns={columns}
-          rows={mockDataInvoices}
-          slots={{ toolbar: GridToolbar }}
-          // filterModel={{
-          //   items: filt,
-          // }}
-          // onFilterModelChange={(newFilterModel) => setFilt(newFilterModel)}
-        /> */}
       </div>
     </Box>
   );
