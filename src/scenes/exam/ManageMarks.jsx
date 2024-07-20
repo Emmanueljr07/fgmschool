@@ -2,12 +2,12 @@ import { Box, useTheme, IconButton, Button } from "@mui/material";
 import React, { useState } from "react";
 import { tokens } from "../../theme";
 import Header from "../../Components/Header";
-import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import { mockDataInvoices } from "../../data/mockData";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
+import DataTable from "react-data-table-component";
 
 const ExamOptions = [
   "First Sequence",
@@ -45,8 +45,25 @@ const ManageMarks = () => {
   const [ClassValue, setClassValue] = useState(ClassOptions[0]);
   const [inputClassValue, setInputClassValue] = useState("");
 
-  const [SubjectValue, setSubjectValue] = useState(ClassOptions[0]);
+  const [SubjectValue, setSubjectValue] = useState(SubjectOptions[0]);
   const [inputSubjectValue, setInputSubjectValue] = useState("");
+
+  // eslint-disable-next-line no-mixed-operators
+  const [tabledata, setTabledata] = useState(mockDataInvoices);
+
+  const FilterTable = (e) => {
+    const newData = mockDataInvoices.filter((row) => {
+      return (
+        row.date.toLowerCase().includes(examValue.toLowerCase()) &&
+        row.phone.toLowerCase().includes(ClassValue.toLowerCase()) &&
+        row.email.toLowerCase().includes(SubjectValue.toLowerCase())
+        // row.date === examValue &&
+        // row.phone === ClassValue &&
+        // row.email === SubjectValue
+      );
+    });
+    setTabledata(newData);
+  };
 
   const onEditButtonClick = (e, row) => {
     e.stopPropagation();
@@ -60,47 +77,38 @@ const ManageMarks = () => {
   };
 
   const columns = [
-    { field: "id", headerName: "ID" },
+    { selector: (row) => row.id, name: "ID", sortable: true },
+    { selector: (row) => row.name, name: "Students", sortable: true },
+    { selector: (row) => row.phone, name: "Class", sortable: true },
+    { selector: (row) => row.email, name: "Subjects", sortable: true },
     {
-      field: "name",
-      headerName: "Students",
-      flex: 1,
-      cellClassName: "name-column--cell",
+      selector: (row) => row.cost,
+      name: "Marks Obtained (Out of 20)",
+      sortable: true,
     },
-    { field: "phone", headerName: "Class", flex: 1 },
-    { field: "email", headerName: "Subjects", flex: 1 },
+    { selector: (row) => row.date, name: "Exam", sortable: true },
     {
-      field: "cost",
-      headerName: "Marks Obtained(Out of 100)",
-      flex: 1,
-    },
-    { field: "date", headerName: "Exam", flex: 1 },
-    {
-      field: "actions",
-      headerName: "",
-      width: 120,
+      key: "action",
+      text: "Actions",
       sortable: false,
-      disableColumnMenu: true,
-      renderCell: (params) => {
-        return (
-          <Box
-            sx={{
-              width: "100%",
-              height: "100%",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            <IconButton onClick={(e) => onEditButtonClick(e, params.row)}>
-              <EditIcon />
-            </IconButton>
-            <IconButton onClick={(e) => onDeleteButtonClick(e, params.row)}>
-              <DeleteIcon />
-            </IconButton>
-          </Box>
-        );
-      },
+      cell: (row) => (
+        <Box
+          sx={{
+            width: "100%",
+            height: "100%",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <IconButton onClick={(e) => onEditButtonClick(e, row)}>
+            <EditIcon />
+          </IconButton>
+          <IconButton onClick={(e) => onDeleteButtonClick(e, row)}>
+            <DeleteIcon />
+          </IconButton>
+        </Box>
+      ),
     },
   ];
 
@@ -164,16 +172,59 @@ const ManageMarks = () => {
             fontWeight: "bold",
             padding: "10px 20px",
           }}
+          onClick={FilterTable}
         >
           Search
         </Button>
       </Box>
       <div style={{ height: 500, width: "100%" }}>
-        <DataGrid
+        <Box
+          sx={{
+            ".rdt_Table": {
+              backgroundColor: "transparent",
+              borderRadius: "10px",
+              color: colors.grey[200],
+            },
+            ".rdt_TableHeader": {
+              backgroundColor: colors.blueAccent[700],
+              color: colors.grey[200],
+            },
+            ".rdt_TableRow": {
+              backgroundColor: "transparent",
+              color: colors.grey[200],
+            },
+            ".rdt_TableCol": {
+              backgroundColor: colors.blueAccent[700],
+              color: colors.grey[200],
+            },
+            ".rdt_Table .rdt_TableRow:hover": {
+              backgroundColor: colors.grey[700],
+            },
+            rdt_TableFooter: {
+              backgroundColor: colors.blueAccent[700],
+              color: colors.grey[200],
+            },
+          }}
+        >
+          <DataTable
+            columns={columns}
+            data={tabledata}
+            fixedHeader
+            pagination
+            // theme={theme.palette.mode}
+            actions={<Button> Export Pdf</Button>}
+            // customStyles={customStyles}
+          ></DataTable>
+        </Box>
+        {/* <DataGrid
           columns={columns}
           rows={mockDataInvoices}
           slots={{ toolbar: GridToolbar }}
-        />
+          // filterModel={{
+          //   items: filt,
+          // }}
+          // onFilterModelChange={(newFilterModel) => setFilt(newFilterModel)}
+        /> */}
       </div>
     </Box>
   );
