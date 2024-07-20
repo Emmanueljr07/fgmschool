@@ -1,25 +1,13 @@
-import { Box, Typography, useTheme, IconButton } from "@mui/material";
+import { Box, Typography, useTheme } from "@mui/material";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import { tokens } from "../../theme";
 import { mockDataInvoices } from "../../data/mockData";
 import Header from "../../Components/Header";
-import EditIcon from "@mui/icons-material/Edit";
-import DeleteIcon from "@mui/icons-material/Delete";
+import TeacherActions from "./TeacherActions";
 
 const Teachers = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-
-  const onEditButtonClick = (e, row) => {
-    e.stopPropagation();
-    console.log(row);
-    //do whatever you want with the row
-  };
-  const onDeleteButtonClick = (e, row) => {
-    e.stopPropagation();
-    console.log(row.id);
-    //do whatever you want with the row
-  };
 
   const columns = [
     { field: "id", headerName: "ID" },
@@ -29,23 +17,31 @@ const Teachers = () => {
       minWidth: 150,
       flex: 1,
       cellClassName: "name-column--cell",
+      editable: true,
     },
-    { field: "phone", headerName: "Phone Number", minWidth: 150, flex: 1 },
+    {
+      field: "phone",
+      headerName: "Phone Number",
+      minWidth: 150,
+      flex: 1,
+      editable: true,
+    },
     { field: "email", headerName: "Email", minWidth: 180, flex: 1 },
     {
       field: "cost",
       headerName: "Subjects",
       minWidth: 100,
       flex: 1,
-      renderCell: (params) => (
-        <Typography sx={{ mt: "15px" }}>{params.row.cost}</Typography>
-      ),
+      editable: true,
     },
     {
       field: "gender",
       headerName: "Gender",
       minWidth: 100,
       flex: 1,
+      editable: true,
+      type: "singleSelect",
+      valueOptions: ["male", "female"],
       renderCell: (params) => (
         <Typography sx={{ mt: "15px" }}>{"Male"}</Typography>
       ),
@@ -57,27 +53,7 @@ const Teachers = () => {
       width: 120,
       sortable: false,
       disableColumnMenu: true,
-      renderCell: (params) => {
-        return (
-          <Box
-            sx={{
-              // backgroundColor: "whitesmoke",
-              width: "100%",
-              height: "100%",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            <IconButton onClick={(e) => onEditButtonClick(e, params.row)}>
-              <EditIcon />
-            </IconButton>
-            <IconButton onClick={(e) => onDeleteButtonClick(e, params.row)}>
-              <DeleteIcon />
-            </IconButton>
-          </Box>
-        );
-      },
+      renderCell: (params) => <TeacherActions {...{ params }} />,
     },
   ];
 
@@ -86,7 +62,6 @@ const Teachers = () => {
       <Header title="Teachers" subtitle="List of Teachers" />
       <Box
         m="40px 0 0 0"
-        height="150vh"
         sx={{
           "& .MuiDataGrid-root": {
             border: "none",
@@ -111,6 +86,7 @@ const Teachers = () => {
           "& .MuiDataGrid-toolbarContainer .MuiButton-text": {
             color: `${colors.grey[100]} !important`,
           },
+          height: 500,
         }}
       >
         <DataGrid
