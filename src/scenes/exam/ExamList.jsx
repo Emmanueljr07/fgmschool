@@ -1,7 +1,6 @@
 import {
   Box,
   useTheme,
-  IconButton,
   Tabs,
   Tab,
   Typography,
@@ -14,8 +13,6 @@ import { tokens } from "../../theme";
 import Header from "../../Components/Header";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import { mockDataInvoices } from "../../data/mockData";
-import EditIcon from "@mui/icons-material/Edit";
-import DeleteIcon from "@mui/icons-material/Delete";
 import AddCircle from "@mui/icons-material/AddCircle";
 import { Form, Formik } from "formik";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
@@ -23,6 +20,7 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { useState } from "react";
 import dayjs from "dayjs";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import ExamListActions from "./ExamListActions";
 
 const initialValues = {
   examName: "",
@@ -76,16 +74,6 @@ const ExamList = () => {
     setTabValue(newValue);
   };
 
-  const onEditButtonClick = (e, row) => {
-    e.stopPropagation();
-    console.log(row);
-    //do whatever you want with the row
-  };
-  const onDeleteButtonClick = (e, row) => {
-    e.stopPropagation();
-    console.log(row.id);
-    //do whatever you want with the row
-  };
   const columns = [
     { field: "id", headerName: "ID" },
     {
@@ -101,26 +89,7 @@ const ExamList = () => {
       width: 120,
       sortable: false,
       disableColumnMenu: true,
-      renderCell: (params) => {
-        return (
-          <Box
-            sx={{
-              width: "100%",
-              height: "100%",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            <IconButton onClick={(e) => onEditButtonClick(e, params.row)}>
-              <EditIcon />
-            </IconButton>
-            <IconButton onClick={(e) => onDeleteButtonClick(e, params.row)}>
-              <DeleteIcon />
-            </IconButton>
-          </Box>
-        );
-      },
+      renderCell: (params) => <ExamListActions {...{ params }} />,
     },
   ];
   return (

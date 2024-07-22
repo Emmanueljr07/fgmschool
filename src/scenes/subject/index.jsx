@@ -1,30 +1,17 @@
-import { Box, useTheme, IconButton, Button } from "@mui/material";
+import { Box, useTheme, Button } from "@mui/material";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import { tokens } from "../../theme";
 import { mockDataInvoices } from "../../data/mockData";
 import Header from "../../Components/Header";
-import EditIcon from "@mui/icons-material/Edit";
-import DeleteIcon from "@mui/icons-material/Delete";
-
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import { useValue } from "../../context/ContextProvider";
 import AddSubject from "./AddSubject";
+import SubjectActions from "./SubjectActions";
 
 const Subject = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const { dispatch } = useValue();
-
-  const onEditButtonClick = (e, row) => {
-    e.stopPropagation();
-    console.log(row);
-    //do whatever you want with the row
-  };
-  const onDeleteButtonClick = (e, row) => {
-    e.stopPropagation();
-    console.log(row.id);
-    //do whatever you want with the row
-  };
 
   const columns = [
     { field: "id", headerName: "ID", width: 80, flex: 0.2, minWidth: 80 },
@@ -49,26 +36,7 @@ const Subject = () => {
       width: 120,
       sortable: false,
       disableColumnMenu: true,
-      renderCell: (params) => {
-        return (
-          <Box
-            sx={{
-              width: "100%",
-              height: "100%",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            <IconButton onClick={(e) => onEditButtonClick(e, params.row)}>
-              <EditIcon />
-            </IconButton>
-            <IconButton onClick={(e) => onDeleteButtonClick(e, params.row)}>
-              <DeleteIcon />
-            </IconButton>
-          </Box>
-        );
-      },
+      renderCell: (params) => <SubjectActions {...{ params }} />,
     },
   ];
 

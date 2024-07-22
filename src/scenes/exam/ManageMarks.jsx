@@ -3,12 +3,11 @@ import React, { useState } from "react";
 import { tokens } from "../../theme";
 import Header from "../../Components/Header";
 import { mockDataInvoices } from "../../data/mockData";
-import EditIcon from "@mui/icons-material/Edit";
-import DeleteIcon from "@mui/icons-material/Delete";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 import DataTable from "react-data-table-component";
 import CloseIcon from "@mui/icons-material/Close";
+import ExamMarkActions from "./ExamMarkActions";
 
 const ExamOptions = [
   "First Sequence",
@@ -74,17 +73,6 @@ const ManageMarks = () => {
     setCancelFilter(false);
   };
 
-  const onEditButtonClick = (e, row) => {
-    e.stopPropagation();
-    console.log(row);
-    //do whatever you want with the row
-  };
-  const onDeleteButtonClick = (e, row) => {
-    e.stopPropagation();
-    console.log(row.id);
-    //do whatever you want with the row
-  };
-
   const columns = [
     { selector: (row) => row.id, name: "ID", sortable: true },
     { selector: (row) => row.name, name: "Students", sortable: true },
@@ -100,24 +88,7 @@ const ManageMarks = () => {
       key: "action",
       text: "Actions",
       sortable: false,
-      cell: (row) => (
-        <Box
-          sx={{
-            width: "100%",
-            height: "100%",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          <IconButton onClick={(e) => onEditButtonClick(e, row)}>
-            <EditIcon />
-          </IconButton>
-          <IconButton onClick={(e) => onDeleteButtonClick(e, row)}>
-            <DeleteIcon />
-          </IconButton>
-        </Box>
-      ),
+      cell: (row) => <ExamMarkActions {...{ row }} />,
     },
   ];
 

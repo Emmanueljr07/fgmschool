@@ -28,6 +28,13 @@ const Teachers = () => {
     },
     { field: "email", headerName: "Email", minWidth: 180, flex: 1 },
     {
+      field: "class",
+      headerName: "Class",
+      minWidth: 100,
+      flex: 1,
+      editable: true,
+    },
+    {
       field: "cost",
       headerName: "Subjects",
       minWidth: 100,
