@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import MuiDrawer from "@mui/material/Drawer";
 import {
   Avatar,
@@ -14,9 +14,18 @@ import {
   Tooltip,
   Typography,
 } from "@mui/material";
-import { ChevronLeft, Inbox, Logout, Mail } from "@mui/icons-material";
+import {
+  ChevronLeft,
+  Dashboard,
+  HelpOutlineOutlined,
+  Logout,
+  Assessment,
+} from "@mui/icons-material";
 import { useValue } from "../../context/ContextProvider";
 import { useNavigate } from "react-router-dom";
+import Main from "../main/Main";
+import Exams from "../exam/Exams";
+import Notice from "../notice/Notice";
 
 const drawerWidth = 240;
 
@@ -73,6 +82,25 @@ const SideList = ({ open, setOpen }) => {
     dispatch,
   } = useValue();
 
+  const list = useMemo(
+    () => [
+      { title: "Main", icon: <Dashboard />, link: "", component: <Main /> },
+      {
+        title: "Exam",
+        icon: <Assessment />,
+        link: "exam",
+        component: <Exams />,
+      },
+      {
+        title: "Notice",
+        icon: <HelpOutlineOutlined />,
+        link: "notice",
+        component: <Notice />,
+      },
+    ],
+    []
+  );
+
   const navigate = useNavigate();
   const handleLogout = () => {
     dispatch({ type: "UPDATE_USER", payload: null });
@@ -89,8 +117,8 @@ const SideList = ({ open, setOpen }) => {
         </DrawerHeader>
         <Divider />
         <List>
-          {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
-            <ListItem key={text} disablePadding sx={{ display: "block" }}>
+          {list.map((item) => (
+            <ListItem key={item.title} disablePadding sx={{ display: "block" }}>
               <ListItemButton
                 sx={{
                   minHeight: 48,
@@ -105,9 +133,12 @@ const SideList = ({ open, setOpen }) => {
                     justifyContent: "center",
                   }}
                 >
-                  {index % 2 === 0 ? <Inbox /> : <Mail />}
+                  {item.icon}
                 </ListItemIcon>
-                <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
+                <ListItemText
+                  primary={item.title}
+                  sx={{ opacity: open ? 1 : 0 }}
+                />
               </ListItemButton>
             </ListItem>
           ))}

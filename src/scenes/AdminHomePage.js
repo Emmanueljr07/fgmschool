@@ -1,60 +1,116 @@
-import { ColorModeContext, useMode } from "../theme";
+import { ColorModeContext, useMode, tokens } from "../theme";
 import { CssBaseline, ThemeProvider } from "@mui/material";
-import { Routes, Route, Navigate } from "react-router-dom";
+import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
+import MuiAppBar from "@mui/material/AppBar";
+import Toolbar from "@mui/material/Toolbar";
+import { Home } from "@mui/icons-material";
+import { styled } from "@mui/material/styles";
+import { Box, IconButton, Tooltip, Typography } from "@mui/material";
+import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
+import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
+import NotificationsOutlinedIcon from "@mui/icons-material/NotificationsOutlined";
+import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
+import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
+import { useContext, useState } from "react";
+import { useValue } from "../context/ContextProvider";
+import UserMenu from "../Components/user/UserMenu";
 
-import Topbar from "./global/Topbar.jsx";
+// import Topbar from "./global/Topbar.jsx";
 import MySidebar from "./global/Sidebar";
-import Dashboard from "./dashboard";
-import Team from "./team/index.jsx";
-import Teachers from "./teachers";
-import AddTeacher from "./teachers/AddTeacher";
-import Parents from "./parent";
-import AddParent from "./parent/AddParent";
-import Students from "./students";
-import AddStudent from "./students/AddStudent";
-import Calendar from "./calendar";
-import NoticeBoard from "./noticeboard";
-import Class from "./class";
-import Staffs from "./staffs";
-import AddStaff from "./staffs/AddStaff";
-import Subject from "./subject/index.jsx";
-import ManageFees from "./fees/manageFees.jsx";
-import ManageMarks from "./exam/ManageMarks.jsx";
-import ExamList from "./exam/ExamList.jsx";
+
+const drawerWidth = 240;
+
+const AppBar = styled(MuiAppBar, {
+  shouldForwardProp: (prop) => prop !== "open",
+})(({ theme, open }) => ({
+  zIndex: theme.zIndex.drawer + 1,
+  transition: theme.transitions.create(["width", "margin"], {
+    easing: theme.transitions.easing.sharp,
+    duration: theme.transitions.duration.leavingScreen,
+  }),
+  ...(open && {
+    marginLeft: drawerWidth,
+    width: `calc(100% - ${drawerWidth}px)`,
+    transition: theme.transitions.create(["width", "margin"], {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
+  }),
+}));
 
 const AdminHomePage = () => {
   const [theme, colorMode] = useMode();
+
+  // const colors = tokens(theme.palette.mode);
+  const [open, setOpen] = useState(true);
+
+  const handleDrawerOpen = () => {
+    setOpen(!open);
+  };
+
+  // const {
+  //   state: { currentUser },
+  // } = useValue();
+
+  const [anchorUserMenu, setAnchorUserMenu] = useState(null);
+
   return (
     <ColorModeContext.Provider value={colorMode}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <div className="app">
-          <MySidebar />
-          <main className="content">
-            <Topbar />
-            <Routes>
-              <Route path="/" exact element={<Navigate to="/dashboard" />} />
-
-              <Route exact path="/dashboard" element={<Dashboard />} />
-              <Route exact path="/team" element={<Team />} />
-              <Route exact path="/students" element={<Students />} />
-              <Route exact path="/teachers" element={<Teachers />} />
-              <Route exact path="/parents" element={<Parents />} />
-              <Route exact path="/staffs" element={<Staffs />} />
-              <Route exact path="/class" element={<Class />} />
-              <Route exact path="/calendar" element={<Calendar />} />
-              <Route exact path="/notice" element={<NoticeBoard />} />
-              <Route exact path="/addstudent" element={<AddStudent />} />
-              <Route exact path="/addparent" element={<AddParent />} />
-              <Route exact path="/addteacher" element={<AddTeacher />} />
-              <Route exact path="/addstaff" element={<AddStaff />} />
-              <Route exact path="/subjects" element={<Subject />} />
-              <Route exact path="/fees" element={<ManageFees />} />
-              <Route exact path="/managemarks" element={<ManageMarks />} />
-              <Route exact path="/exams" element={<ExamList />} />
-            </Routes>
-          </main>
-        </div>
+        <AppBar position="fixed">
+          <Toolbar>
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              onClick={handleDrawerOpen}
+              edge="start"
+              // sx={{
+              //   marginRight: 5,
+              //   ...(!open && { display: "none" }),
+              // }}
+            >
+              <MenuOutlinedIcon />
+            </IconButton>
+            <Tooltip>
+              <IconButton sx={{ mr: 1 }}>
+                <Home />
+              </IconButton>
+            </Tooltip>
+            <Typography
+              variant="h6"
+              noWrap
+              component="div"
+              sx={{ flexGrow: 1 }}
+            >
+              Dashboard
+            </Typography>
+            <Box display="flex">
+              <IconButton onClick={colorMode.toggleColorMode}>
+                {theme.palette.mode === "dark" ? (
+                  <DarkModeOutlinedIcon />
+                ) : (
+                  <LightModeOutlinedIcon />
+                )}
+              </IconButton>
+              <IconButton>
+                <NotificationsOutlinedIcon />
+              </IconButton>
+              <IconButton>
+                <SettingsOutlinedIcon />
+              </IconButton>
+              <Tooltip title="Open User Settings">
+                <IconButton onClick={(e) => setAnchorUserMenu(e.currentTarget)}>
+                  <PersonOutlinedIcon />
+                </IconButton>
+              </Tooltip>
+              <UserMenu {...{ anchorUserMenu, setAnchorUserMenu }} />
+            </Box>
+          </Toolbar>
+        </AppBar>
+        <Box mt={6}>
+          <MySidebar {...{ open, setOpen }} />
+        </Box>
       </ThemeProvider>
     </ColorModeContext.Provider>
   );
