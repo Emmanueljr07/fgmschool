@@ -85,6 +85,8 @@ const Subject = () => {
               color: `${colors.grey[100]} !important`,
               margin: "10px 0",
             },
+            height: 500,
+            width: 700,
           }}
         >
           <DataGrid

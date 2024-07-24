@@ -93,7 +93,7 @@ const ExamList = () => {
     },
   ];
   return (
-    <Box m="20px">
+    <Box m="20px" width="70%">
       <Header title="Manage All the Exam" subtitle="List of all the exams" />
       <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
         <Tabs

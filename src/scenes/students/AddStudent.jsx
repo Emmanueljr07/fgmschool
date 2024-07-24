@@ -48,7 +48,7 @@ const AddStudent = () => {
   const [dob, setDob] = useState(dayjs(""));
 
   return (
-    <Box m="20px">
+    <Box m="20px" width="100%">
       <Header title={"Addmission Form"} />
 
       <Formik
