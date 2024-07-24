@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useState } from "react";
 import MuiDrawer from "@mui/material/Drawer";
 import {
   Avatar,
@@ -22,7 +22,7 @@ import {
   Assessment,
 } from "@mui/icons-material";
 import { useValue } from "../../context/ContextProvider";
-import { useNavigate } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import Main from "../main/Main";
 import Exams from "../exam/Exams";
 import Notice from "../notice/Notice";
@@ -82,20 +82,27 @@ const SideList = ({ open, setOpen }) => {
     dispatch,
   } = useValue();
 
+  const [selectedLink, setSelectedLink] = useState("");
+
   const list = useMemo(
     () => [
-      { title: "Main", icon: <Dashboard />, link: "", component: <Main /> },
+      {
+        title: "Main",
+        icon: <Dashboard />,
+        link: "",
+        component: <Main {...{ setSelectedLink, link: "" }} />,
+      },
       {
         title: "Exam",
         icon: <Assessment />,
         link: "exam",
-        component: <Exams />,
+        component: <Exams {...{ setSelectedLink, link: "exam" }} />,
       },
       {
         title: "Notice",
         icon: <HelpOutlineOutlined />,
         link: "notice",
-        component: <Notice />,
+        component: <Notice {...{ setSelectedLink, link: "notice" }} />,
       },
     ],
     []
@@ -125,6 +132,8 @@ const SideList = ({ open, setOpen }) => {
                   justifyContent: open ? "initial" : "center",
                   px: 2.5,
                 }}
+                onClick={() => navigate(item.link)}
+                selected={selectedLink === item.link}
               >
                 <ListItemIcon
                   sx={{
@@ -170,6 +179,11 @@ const SideList = ({ open, setOpen }) => {
       </Drawer>
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <DrawerHeader />
+        <Routes>
+          {list.map((item) => (
+            <Route key={item.title} path={item.link} element={item.component} />
+          ))}
+        </Routes>
       </Box>
     </>
   );

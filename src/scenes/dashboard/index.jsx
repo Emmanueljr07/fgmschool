@@ -1,9 +1,10 @@
-import { Box, useTheme } from "@mui/material";
+import { Box, useTheme, Paper, Typography } from "@mui/material";
 import Header from "../../Components/Header";
 import { tokens } from "../../theme";
 import SchoolIcon from "@mui/icons-material/School";
 import GroupIcon from "@mui/icons-material/Group";
 import ClassIcon from "@mui/icons-material/Class";
+import SubjectIcon from "@mui/icons-material/Subject";
 import StatBox from "../../Components/StatBox";
 
 const Dashboard = () => {
@@ -11,7 +12,7 @@ const Dashboard = () => {
   const colors = tokens(theme.palette.mode);
 
   return (
-    <Box m="20px">
+    <Box m="20px" width="100%">
       <Box display="flex" justifyContent="space-between" alignItems="center">
         <Header title="DASHBOARD" subtitle="Welcome to your dashboard" />
       </Box>
@@ -19,128 +20,88 @@ const Dashboard = () => {
       {/* GRID AND CHARTS */}
 
       <Box
-        gridColumn="span 2"
-        display="grid"
-        gridTemplateColumns="repeat(12, 1fr)"
-        gridAutoRows="120px"
-        gap="15px"
+        sx={{
+          display: { xs: "flex", md: "grid" },
+          flexDirection: "column",
+          gridTemplateColumns: "repeat(10, 1fr)",
+          gridAutoRows: "minmax(100px, auto)",
+          gap: 2,
+        }}
       >
-        {/* ROW 1 */}
-        <Box
+        <Paper
           gridColumn="span 4"
+          elevation={3}
+          sx={{ p: 3 }}
           backgroundColor={colors.primary[400]}
-          display="flex"
-          alignItems="center"
-          justifyContent="center"
-          borderRadius="15px"
         >
-          <StatBox
-            title="Students"
-            amount="400"
-            icon={
-              <SchoolIcon
-                sx={{ color: colors.greenAccent[600], fontSize: "30px" }}
-              />
-            }
-          />
-        </Box>
-
-        <Box
-          gridColumn="span 4"
-          backgroundColor={colors.primary[400]}
-          display="flex"
-          alignItems="center"
-          justifyContent="center"
-          borderRadius="15px"
-        >
-          <StatBox
-            title="Teachers"
-            amount="61"
-            icon={
-              <GroupIcon
-                sx={{ color: colors.greenAccent[600], fontSize: "30px" }}
-              />
-            }
-          />
-        </Box>
-
-        <Box
-          gridColumn="span 4"
-          backgroundColor={colors.primary[400]}
-          display="flex"
-          alignItems="center"
-          justifyContent="center"
-          borderRadius="15px"
-        >
-          <StatBox
-            title="Staffs"
-            amount="130"
-            icon={
-              <ClassIcon
-                sx={{ color: colors.greenAccent[600], fontSize: "30px" }}
-              />
-            }
-          />
-        </Box>
-
-        {/* ROW 2 */}
-        {/* <Box
-          gridColumn="span 12"
-          gridRow="span 2"
-          backgroundColor={colors.primary[400]}
-          borderRadius="15px"
-        >
+          <Typography variant="h4">Total Users</Typography>
           <Box
-            mt="25px"
-            p="0 30px"
-            display="flex"
-            justifyContent="space-between"
-            alignItems="center"
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
           >
-            <Box>
-              <Typography
-                variant="h5"
-                fontWeight="600"
-                color={colors.grey[100]}
-              >
-                School Fees
-              </Typography>
-            </Box>
-            <Box>
-              <IconButton>
-                <DownloadOutlinedIcon
-                  sx={{ fontSize: "26px", color: colors.greenAccent[500] }}
-                />
-              </IconButton>
-            </Box>
+            <SubjectIcon
+              sx={{ height: 100, width: 100, opacity: 0.3, mr: 1 }}
+            />
+            <Typography variant="h4">10</Typography>
           </Box>
-
-          <Box height="230px" mt="-40px">
-            <LineChart isDashboard={true} />
-          </Box>
-        </Box> */}
-
-        {/* ROW 3 */}
-
-        {/* <Box
-          gridColumn="span 12"
-          gridRow="span 2"
-          backgroundColor={colors.primary[400]}
-          borderRadius="15px"
-        >
-          <Typography
-            variant="h5"
-            fontWeight="600"
-            sx={{ p: "10px 20px 0 30px" }}
+        </Paper>
+        <Paper elevation={3} sx={{ p: 3 }}>
+          <Typography variant="h4">Total Students</Typography>
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
           >
-            Sales Quantity
-          </Typography>
-          <Box height="250px" mt="-20px">
-            <BarChart isDashboard={true} />
+            <SchoolIcon sx={{ height: 100, width: 100, opacity: 0.3, mr: 1 }} />
+            <Typography variant="h4">200</Typography>
           </Box>
-        </Box> */}
-
-        {/*  */}
+        </Paper>
+        <Paper elevation={3} sx={{ p: 3 }}>
+          <Typography variant="h4">Total Teachers</Typography>
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <GroupIcon sx={{ height: 100, width: 100, opacity: 0.3, mr: 1 }} />
+            <Typography variant="h4">40</Typography>
+          </Box>
+        </Paper>
+        <Paper elevation={3} sx={{ p: 3 }}>
+          <Typography variant="h4">Total Subjects</Typography>
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <SubjectIcon
+              sx={{ height: 100, width: 100, opacity: 0.3, mr: 1 }}
+            />
+            <Typography variant="h4">60</Typography>
+          </Box>
+        </Paper>
+        <Paper elevation={3} sx={{ p: 3 }}>
+          <Typography variant="h4">Total Class</Typography>
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <ClassIcon sx={{ height: 100, width: 100, opacity: 0.3, mr: 1 }} />
+            <Typography variant="h4">6</Typography>
+          </Box>
+        </Paper>
       </Box>
     </Box>
   );

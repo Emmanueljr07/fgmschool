@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 
-const Notice = () => {
+const Notice = ({ setSelectedLink, link }) => {
+  useEffect(() => {
+    setSelectedLink(link);
+  });
   return <div>Notice</div>;
 };
 
