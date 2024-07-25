@@ -6,7 +6,10 @@ const StatBox = ({ title, icon, amount }) => {
   const colors = tokens(theme.palette.mode);
 
   return (
-    <Paper elevation={3} sx={{ p: 3, gridColumn: "span 2" }}>
+    <Paper
+      elevation={3}
+      sx={{ p: 3, gridColumn: "span 2", backgroundColor: colors.primary[400] }}
+    >
       <Typography variant="h4">{title}</Typography>
       <Box
         sx={{

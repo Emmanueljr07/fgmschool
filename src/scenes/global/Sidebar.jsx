@@ -44,7 +44,6 @@ import Subject from "../subject/index.jsx";
 import ManageFees from "../fees/manageFees.jsx";
 import ManageMarks from "../exam/ManageMarks.jsx";
 import ExamList from "../exam/ExamList.jsx";
-// import { ChevronLeft } from "@mui/icons-material";
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
@@ -97,35 +96,6 @@ const MySidebar = ({ open, setOpen }) => {
         <Sidebar collapsed={open} transitionDuration={800}>
           <Menu iconShape="square">
             {/* {LOGO AND MENU ICON} */}
-            {/* 
-            <Box
-              display="flex"
-              justifyContent="end"
-              alignItems="center"
-              mt="15px"
-              mr="20px"
-              mb="15px"
-              sx={{ display: { xs: "none", md: "flex" } }}
-            >
-              <IconButton onClick={() => setIsCollapsed(!isCollapsed)}>
-                {isCollapsed ? <MenuOutlinedIcon /> : <ChevronLeft />}
-              </IconButton>
-            </Box>
-            <Box
-              display="flex"
-              justifyContent="end"
-              alignItems="center"
-              mt="15px"
-              mr="20px"
-              mb="15px"
-              sx={{ display: { xs: "flex", md: "none" } }}
-            >
-              <IconButton onClick={() => setIsCollapsed(!isCollapsed)}>
-                {isCollapsed ? <MenuOutlinedIcon /> : <ChevronLeft />}
-              </IconButton>
-            </Box> */}
-
-            {/* {MENU ITEMS} */}
 
             {/* {MENU ITEMS} */}
             <Box paddingLeft={open ? undefined : "10px"}>

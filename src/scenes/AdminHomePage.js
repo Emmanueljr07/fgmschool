@@ -1,5 +1,5 @@
 import { ColorModeContext, useMode } from "../theme";
-// import {  tokens } from "../theme";
+// import { tokens } from "../theme";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import MuiAppBar from "@mui/material/AppBar";
@@ -16,8 +16,6 @@ import { useState } from "react";
 // import { useContext,} from "react";
 // import { useValue } from "../context/ContextProvider";
 import UserMenu from "../Components/user/UserMenu";
-
-// import Topbar from "./global/Topbar.jsx";
 import MySidebar from "./global/Sidebar";
 
 const drawerWidth = 240;
@@ -60,7 +58,7 @@ const AdminHomePage = () => {
     <ColorModeContext.Provider value={colorMode}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <AppBar position="fixed">
+        <AppBar position="fixed" color="default1" enableColorOnDark>
           <Toolbar sx={{ ml: 1 }}>
             <IconButton
               color="inherit"
