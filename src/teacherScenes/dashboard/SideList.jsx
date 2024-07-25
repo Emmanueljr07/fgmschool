@@ -24,8 +24,8 @@ import {
 import { useValue } from "../../context/ContextProvider";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import Main from "../main/Main";
-import Exams from "../exam/Exams";
 import Notice from "../notice/Notice";
+import TeacherExamBoard from "../exam/Exams";
 
 const drawerWidth = 240;
 
@@ -96,7 +96,7 @@ const SideList = ({ open, setOpen }) => {
         title: "Exam",
         icon: <Assessment />,
         link: "exam",
-        component: <Exams {...{ setSelectedLink, link: "exam" }} />,
+        component: <TeacherExamBoard {...{ setSelectedLink, link: "exam" }} />,
       },
       {
         title: "Notice",

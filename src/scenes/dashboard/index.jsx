@@ -6,6 +6,7 @@ import GroupIcon from "@mui/icons-material/Group";
 import ClassIcon from "@mui/icons-material/Class";
 import SubjectIcon from "@mui/icons-material/Subject";
 import StatBox from "../../Components/StatBox";
+import { Quiz } from "@mui/icons-material";
 
 const Dashboard = () => {
   const theme = useTheme();
@@ -23,15 +24,14 @@ const Dashboard = () => {
         sx={{
           display: { xs: "flex", md: "grid" },
           flexDirection: "column",
-          gridTemplateColumns: "repeat(10, 1fr)",
+          gridTemplateColumns: "repeat(4, 1fr)",
           gridAutoRows: "minmax(100px, auto)",
           gap: 2,
         }}
       >
         <Paper
-          gridColumn="span 4"
           elevation={3}
-          sx={{ p: 3 }}
+          sx={{ p: 3, gridColumn: "span 2" }}
           backgroundColor={colors.primary[400]}
         >
           <Typography variant="h4">Total Users</Typography>
@@ -48,7 +48,7 @@ const Dashboard = () => {
             <Typography variant="h4">10</Typography>
           </Box>
         </Paper>
-        <Paper elevation={3} sx={{ p: 3 }}>
+        <Paper elevation={3} sx={{ p: 3, gridColumn: "span 2" }}>
           <Typography variant="h4">Total Students</Typography>
           <Box
             sx={{
@@ -61,7 +61,7 @@ const Dashboard = () => {
             <Typography variant="h4">200</Typography>
           </Box>
         </Paper>
-        <Paper elevation={3} sx={{ p: 3 }}>
+        <Paper elevation={3} sx={{ p: 3, gridColumn: "span 2" }}>
           <Typography variant="h4">Total Teachers</Typography>
           <Box
             sx={{
@@ -74,7 +74,7 @@ const Dashboard = () => {
             <Typography variant="h4">40</Typography>
           </Box>
         </Paper>
-        <Paper elevation={3} sx={{ p: 3 }}>
+        <Paper elevation={3} sx={{ p: 3, gridColumn: "span 2" }}>
           <Typography variant="h4">Total Subjects</Typography>
           <Box
             sx={{
@@ -89,7 +89,7 @@ const Dashboard = () => {
             <Typography variant="h4">60</Typography>
           </Box>
         </Paper>
-        <Paper elevation={3} sx={{ p: 3 }}>
+        <Paper elevation={3} sx={{ p: 3, gridColumn: "span 2" }}>
           <Typography variant="h4">Total Class</Typography>
           <Box
             sx={{
@@ -102,6 +102,13 @@ const Dashboard = () => {
             <Typography variant="h4">6</Typography>
           </Box>
         </Paper>
+        <StatBox
+          title="Total Exams"
+          icon={
+            <Quiz sx={{ height: 100, width: 100, opacity: 0.3, mr: 1 }} sid />
+          }
+          amount="6"
+        />
       </Box>
     </Box>
   );

@@ -4,7 +4,7 @@ import { CssBaseline, ThemeProvider } from "@mui/material";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import MuiAppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
-import { Home } from "@mui/icons-material";
+// import { Home } from "@mui/icons-material";
 import { styled } from "@mui/material/styles";
 import { Box, IconButton, Tooltip, Typography } from "@mui/material";
 import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
@@ -61,29 +61,27 @@ const AdminHomePage = () => {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <AppBar position="fixed">
-          <Toolbar>
+          <Toolbar sx={{ ml: 1 }}>
             <IconButton
               color="inherit"
               aria-label="open drawer"
               onClick={handleDrawerOpen}
               edge="start"
-              // sx={{
-              //   marginRight: 5,
-              //   ...(!open && { display: "none" }),
-              // }}
+              sx={
+                {
+                  // marginRight: 5,
+                  // ...(!open && { display: "none" }),
+                }
+              }
             >
               <MenuOutlinedIcon />
             </IconButton>
-            <Tooltip>
-              <IconButton sx={{ mr: 1 }}>
-                <Home />
-              </IconButton>
-            </Tooltip>
+
             <Typography
               variant="h6"
               noWrap
               component="div"
-              sx={{ flexGrow: 1 }}
+              sx={{ ml: 6, flexGrow: 1 }}
             >
               Dashboard
             </Typography>

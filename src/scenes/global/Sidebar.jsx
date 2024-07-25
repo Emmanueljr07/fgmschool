@@ -19,6 +19,7 @@ import ReceiptOutlinedIcon from "@mui/icons-material/ReceiptOutlined";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import CalendarTodayOutlinedIcon from "@mui/icons-material/CalendarTodayOutlined";
 import HelpOutlinedIcon from "@mui/icons-material/HelpOutlined";
+// import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import SubjectIcon from "@mui/icons-material/Subject";
 import LibraryBooksIcon from "@mui/icons-material/LibraryBooks";
 import TokenIcon from "@mui/icons-material/Token";
@@ -43,6 +44,7 @@ import Subject from "../subject/index.jsx";
 import ManageFees from "../fees/manageFees.jsx";
 import ManageMarks from "../exam/ManageMarks.jsx";
 import ExamList from "../exam/ExamList.jsx";
+// import { ChevronLeft } from "@mui/icons-material";
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
@@ -63,6 +65,7 @@ const Item = ({ title, to, icon, selected, setSelected }) => {
 const MySidebar = ({ open, setOpen }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+  // const [isCollapsed, setIsCollapsed] = useState(false);
   const [selected, setSelected] = useState("Dashboard");
 
   return (
@@ -94,6 +97,33 @@ const MySidebar = ({ open, setOpen }) => {
         <Sidebar collapsed={open} transitionDuration={800}>
           <Menu iconShape="square">
             {/* {LOGO AND MENU ICON} */}
+            {/* 
+            <Box
+              display="flex"
+              justifyContent="end"
+              alignItems="center"
+              mt="15px"
+              mr="20px"
+              mb="15px"
+              sx={{ display: { xs: "none", md: "flex" } }}
+            >
+              <IconButton onClick={() => setIsCollapsed(!isCollapsed)}>
+                {isCollapsed ? <MenuOutlinedIcon /> : <ChevronLeft />}
+              </IconButton>
+            </Box>
+            <Box
+              display="flex"
+              justifyContent="end"
+              alignItems="center"
+              mt="15px"
+              mr="20px"
+              mb="15px"
+              sx={{ display: { xs: "flex", md: "none" } }}
+            >
+              <IconButton onClick={() => setIsCollapsed(!isCollapsed)}>
+                {isCollapsed ? <MenuOutlinedIcon /> : <ChevronLeft />}
+              </IconButton>
+            </Box> */}
 
             {/* {MENU ITEMS} */}
 
