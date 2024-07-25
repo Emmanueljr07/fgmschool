@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import FullCalendar from "@fullcalendar/react";
 import { formatDate } from "@fullcalendar/core";
 import dayGridPlugin from "@fullcalendar/daygrid";
@@ -16,7 +16,11 @@ import {
 import Header from "../../Components/Header";
 import { tokens } from "../../theme";
 
-const Calendar = () => {
+const Calendar = ({ setSelectedLink, link }) => {
+  useEffect(() => {
+    setSelectedLink(link);
+  });
+
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [currentEvents, setCurrentEvents] = useState([]);

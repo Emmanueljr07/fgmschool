@@ -7,10 +7,16 @@ import AddCircleIcon from "@mui/icons-material/AddCircle";
 import { useValue } from "../../context/ContextProvider";
 import AddSubject from "./AddSubject";
 import SubjectActions from "./SubjectActions";
+import { useEffect } from "react";
 
-const Subject = () => {
+const Subject = ({ setSelectedLink, link }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+
+  useEffect(() => {
+    setSelectedLink(link);
+  });
+
   const { dispatch } = useValue();
 
   const columns = [

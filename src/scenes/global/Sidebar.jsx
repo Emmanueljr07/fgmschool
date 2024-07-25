@@ -45,15 +45,15 @@ import ManageFees from "../fees/manageFees.jsx";
 import ManageMarks from "../exam/ManageMarks.jsx";
 import ExamList from "../exam/ExamList.jsx";
 
-const Item = ({ title, to, icon, selected, setSelected }) => {
+const Item = ({ title, to, icon, selected, setSelected, selectedLink }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   return (
     <MenuItem
       component={<Link to={to} />}
-      active={selected === title}
+      active={selectedLink === to}
       style={{ color: colors.grey[100] }}
-      onClick={() => setSelected(title)}
+      onClick={() => setSelected(to)}
       icon={icon}
     >
       <Typography>{title}</Typography>
@@ -66,6 +66,7 @@ const MySidebar = ({ open, setOpen }) => {
   const colors = tokens(theme.palette.mode);
   // const [isCollapsed, setIsCollapsed] = useState(false);
   const [selected, setSelected] = useState("Dashboard");
+  const [selectedLink, setSelectedLink] = useState("");
 
   return (
     <>
@@ -105,6 +106,7 @@ const MySidebar = ({ open, setOpen }) => {
                 icon={<HomeOutlinedIcon />}
                 selected={selected}
                 setSelected={setSelected}
+                selectedLink={selectedLink}
               />
 
               <Item
@@ -113,14 +115,22 @@ const MySidebar = ({ open, setOpen }) => {
                 icon={<PeopleOutlinedIcon />}
                 selected={selected}
                 setSelected={setSelected}
+                selectedLink={selectedLink}
               />
-              <SubMenu label="Students" icon={<SchoolIcon />}>
+              <SubMenu
+                active={
+                  selectedLink === "students" || selectedLink === "addstudent"
+                }
+                label="Students"
+                icon={<SchoolIcon />}
+              >
                 <Item
                   title="All Students"
                   to="students"
                   icon={<ContactsOutlinedIcon />}
                   selected={selected}
                   setSelected={setSelected}
+                  selectedLink={selectedLink}
                 />
                 <Item
                   title="Admission Form"
@@ -128,16 +138,24 @@ const MySidebar = ({ open, setOpen }) => {
                   icon={<PersonAddIcon />}
                   selected={selected}
                   setSelected={setSelected}
+                  selectedLink={selectedLink}
                 />
               </SubMenu>
 
-              <SubMenu label="Teachers" icon={<GroupIcon />}>
+              <SubMenu
+                active={
+                  selectedLink === "teachers" || selectedLink === "addteacher"
+                }
+                label="Teachers"
+                icon={<GroupIcon />}
+              >
                 <Item
                   title="All Teachers"
                   to="teachers"
                   icon={<ReceiptOutlinedIcon />}
                   selected={selected}
                   setSelected={setSelected}
+                  selectedLink={selectedLink}
                 />
                 <Item
                   title="Add Teacher"
@@ -145,35 +163,53 @@ const MySidebar = ({ open, setOpen }) => {
                   icon={<PersonAddIcon />}
                   selected={selected}
                   setSelected={setSelected}
+                  selectedLink={selectedLink}
                 />
               </SubMenu>
 
-              <SubMenu label="Class" icon={<Diversity2Icon />}>
+              <SubMenu
+                active={selectedLink === "class"}
+                label="Class"
+                icon={<Diversity2Icon />}
+              >
                 <Item
                   title="Manage Classes"
                   to="class"
                   icon={<ReceiptOutlinedIcon />}
                   selected={selected}
                   setSelected={setSelected}
+                  selectedLink={selectedLink}
                 />
               </SubMenu>
-              <SubMenu label="Subject" icon={<LibraryBooksIcon />}>
+              <SubMenu
+                active={selectedLink === "subjects"}
+                label="Subject"
+                icon={<LibraryBooksIcon />}
+              >
                 <Item
                   title="Manage Subjects"
                   to="subjects"
                   icon={<SubjectIcon />}
                   selected={selected}
                   setSelected={setSelected}
+                  selectedLink={selectedLink}
                 />
               </SubMenu>
 
-              <SubMenu label="Exam Section" icon={<TokenIcon />}>
+              <SubMenu
+                active={
+                  selectedLink === "exams" || selectedLink === "managemarks"
+                }
+                label="Exam Section"
+                icon={<TokenIcon />}
+              >
                 <Item
                   title="Exam Lists "
                   to="exams"
                   icon={<QuizIcon />}
                   selected={selected}
                   setSelected={setSelected}
+                  selectedLink={selectedLink}
                 />
                 <Item
                   title="Manage Marks"
@@ -181,6 +217,7 @@ const MySidebar = ({ open, setOpen }) => {
                   icon={<GradeIcon />}
                   selected={selected}
                   setSelected={setSelected}
+                  selectedLink={selectedLink}
                 />
               </SubMenu>
 
@@ -190,6 +227,7 @@ const MySidebar = ({ open, setOpen }) => {
                 icon={<PaymentsIcon />}
                 selected={selected}
                 setSelected={setSelected}
+                selectedLink={selectedLink}
               />
               <Item
                 title="Calendar"
@@ -197,6 +235,7 @@ const MySidebar = ({ open, setOpen }) => {
                 icon={<CalendarTodayOutlinedIcon />}
                 selected={selected}
                 setSelected={setSelected}
+                selectedLink={selectedLink}
               />
               <Item
                 title="Notice"
@@ -204,6 +243,7 @@ const MySidebar = ({ open, setOpen }) => {
                 icon={<HelpOutlinedIcon />}
                 selected={selected}
                 setSelected={setSelected}
+                selectedLink={selectedLink}
               />
             </Box>
           </Menu>
@@ -211,23 +251,97 @@ const MySidebar = ({ open, setOpen }) => {
         <Routes>
           <Route path="" exact element={<Navigate to="dashboard" />} />
 
-          <Route exact path="dashboard" element={<Dashboard />} />
-          <Route exact path="team" element={<Team />} />
-          <Route exact path="students" element={<Students />} />
-          <Route exact path="teachers" element={<Teachers />} />
-          <Route exact path="parents" element={<Parents />} />
-          <Route exact path="staffs" element={<Staffs />} />
-          <Route exact path="class" element={<Class />} />
-          <Route exact path="calendar" element={<Calendar />} />
-          <Route exact path="notice" element={<NoticeBoard />} />
-          <Route exact path="addstudent" element={<AddStudent />} />
-          <Route exact path="addparent" element={<AddParent />} />
-          <Route exact path="addteacher" element={<AddTeacher />} />
-          <Route exact path="addstaff" element={<AddStaff />} />
-          <Route exact path="subjects" element={<Subject />} />
-          <Route exact path="fees" element={<ManageFees />} />
-          <Route exact path="managemarks" element={<ManageMarks />} />
-          <Route exact path="exams" element={<ExamList />} />
+          <Route
+            exact
+            path="dashboard"
+            element={<Dashboard {...{ setSelectedLink, link: "dashboard" }} />}
+          />
+          <Route
+            exact
+            path="team"
+            element={<Team {...{ setSelectedLink, link: "team" }} />}
+          />
+          <Route
+            exact
+            path="students"
+            element={<Students {...{ setSelectedLink, link: "students" }} />}
+          />
+          <Route
+            exact
+            path="teachers"
+            element={<Teachers {...{ setSelectedLink, link: "teachers" }} />}
+          />
+          <Route
+            exact
+            path="parents"
+            element={<Parents {...{ setSelectedLink, link: "parents" }} />}
+          />
+          <Route
+            exact
+            path="staffs"
+            element={<Staffs {...{ setSelectedLink, link: "staffs" }} />}
+          />
+          <Route
+            exact
+            path="class"
+            element={<Class {...{ setSelectedLink, link: "class" }} />}
+          />
+          <Route
+            exact
+            path="calendar"
+            element={<Calendar {...{ setSelectedLink, link: "calendar" }} />}
+          />
+          <Route
+            exact
+            path="notice"
+            element={<NoticeBoard {...{ setSelectedLink, link: "notice" }} />}
+          />
+          <Route
+            exact
+            path="addstudent"
+            element={
+              <AddStudent {...{ setSelectedLink, link: "addstudent" }} />
+            }
+          />
+          <Route
+            exact
+            path="addparent"
+            element={<AddParent {...{ setSelectedLink, link: "addparent" }} />}
+          />
+          <Route
+            exact
+            path="addteacher"
+            element={
+              <AddTeacher {...{ setSelectedLink, link: "addteacher" }} />
+            }
+          />
+          <Route
+            exact
+            path="addstaff"
+            element={<AddStaff {...{ setSelectedLink, link: "addstaff" }} />}
+          />
+          <Route
+            exact
+            path="subjects"
+            element={<Subject {...{ setSelectedLink, link: "subjects" }} />}
+          />
+          <Route
+            exact
+            path="fees"
+            element={<ManageFees {...{ setSelectedLink, link: "fees" }} />}
+          />
+          <Route
+            exact
+            path="managemarks"
+            element={
+              <ManageMarks {...{ setSelectedLink, link: "managemarks" }} />
+            }
+          />
+          <Route
+            exact
+            path="exams"
+            element={<ExamList {...{ setSelectedLink, link: "exams" }} />}
+          />
         </Routes>
       </Box>
     </>

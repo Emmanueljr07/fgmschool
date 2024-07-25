@@ -5,10 +5,14 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { tokens } from "../../theme";
+import { useEffect } from "react";
 
-const NoticeBoard = () => {
+const NoticeBoard = ({ setSelectedLink, link }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+  useEffect(() => {
+    setSelectedLink(link);
+  });
 
   return (
     <Box m="20px">

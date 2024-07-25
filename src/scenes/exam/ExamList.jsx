@@ -8,7 +8,7 @@ import {
   Button,
 } from "@mui/material";
 import PropTypes from "prop-types";
-import React from "react";
+import React, { useEffect } from "react";
 import { tokens } from "../../theme";
 import Header from "../../Components/Header";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
@@ -55,9 +55,12 @@ function a11yProps(index) {
   };
 }
 
-const ExamList = () => {
+const ExamList = ({ setSelectedLink, link }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+  useEffect(() => {
+    setSelectedLink(link);
+  });
 
   const handleFormSubmit = (formValues, { resetForm }) => {
     console.log(formValues);

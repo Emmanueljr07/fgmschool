@@ -7,7 +7,12 @@ import CreateClass from "./createclass";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import { useValue } from "../../context/ContextProvider";
 import ClassActions from "./ClassActions";
-const Class = () => {
+import { useEffect } from "react";
+const Class = ({ setSelectedLink, link }) => {
+  useEffect(() => {
+    setSelectedLink(link);
+  });
+
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const { dispatch } = useValue();

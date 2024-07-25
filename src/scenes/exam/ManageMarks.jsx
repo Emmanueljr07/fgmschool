@@ -1,5 +1,5 @@
 import { Box, useTheme, IconButton, Button } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { tokens } from "../../theme";
 import Header from "../../Components/Header";
 import { mockDataInvoices } from "../../data/mockData";
@@ -35,9 +35,12 @@ const SubjectOptions = [
   "Chemistry",
 ];
 
-const ManageMarks = () => {
+const ManageMarks = ({ setSelectedLink, link }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+  useEffect(() => {
+    setSelectedLink(link);
+  });
 
   const [examValue, setExamValue] = useState(ExamOptions[0]);
   const [inputExamValue, setInputExamValue] = useState("");

@@ -1,7 +1,8 @@
-import { People, Subject } from "@mui/icons-material";
+import { Subject } from "@mui/icons-material";
 import { Box } from "@mui/material";
 import React, { useEffect } from "react";
 import StatBox from "../../Components/StatBox";
+import SchoolIcon from "@mui/icons-material/School";
 
 const Main = ({ setSelectedLink, link }) => {
   useEffect(() => {
@@ -26,7 +27,9 @@ const Main = ({ setSelectedLink, link }) => {
       <StatBox
         title="My Students"
         amount="40"
-        icon={<People sx={{ height: 50, width: 100, opacity: 0.3, mr: 1 }} />}
+        icon={
+          <SchoolIcon sx={{ height: 50, width: 100, opacity: 0.3, mr: 1 }} />
+        }
       />
     </Box>
   );

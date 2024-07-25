@@ -4,10 +4,14 @@ import { tokens } from "../../theme";
 import { mockTransactions } from "../../data/mockData";
 import Header from "../../Components/Header";
 import PaymentActions from "./PaymentActions";
+import { useEffect } from "react";
 
-const ManageFees = () => {
+const ManageFees = ({ setSelectedLink, link }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+  useEffect(() => {
+    setSelectedLink(link);
+  });
 
   const columns = [
     { field: "id", headerName: "ID", width: 80, flex: 0.2, minWidth: 80 },

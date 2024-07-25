@@ -4,10 +4,14 @@ import { tokens } from "../../theme";
 import { mockDataInvoices } from "../../data/mockData";
 import Header from "../../Components/Header";
 import TeacherActions from "./TeacherActions";
+import { useEffect } from "react";
 
-const Teachers = () => {
+const Teachers = ({ setSelectedLink, link }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+  useEffect(() => {
+    setSelectedLink(link);
+  });
 
   const columns = [
     { field: "id", headerName: "ID" },

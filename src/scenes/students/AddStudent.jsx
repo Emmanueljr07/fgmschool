@@ -7,7 +7,7 @@ import dayjs from "dayjs";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const initialValues = {
   firstName: "",
@@ -35,7 +35,11 @@ const studentSchema = yup.object().shape({
   address: yup.string().required("required"),
 });
 
-const AddStudent = () => {
+const AddStudent = ({ setSelectedLink, link }) => {
+  useEffect(() => {
+    setSelectedLink(link);
+  });
+
   const isNonMobile = useMediaQuery("(min-width:600px)");
 
   const handleFormSubmit = (formValues, { resetForm }) => {

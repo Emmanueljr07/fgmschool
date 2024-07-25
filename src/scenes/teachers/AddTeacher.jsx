@@ -3,6 +3,7 @@ import { Form, Formik } from "formik";
 import * as yup from "yup";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Header from "../../Components/Header";
+import { useEffect } from "react";
 
 const initialValues = {
   fullName: "",
@@ -32,7 +33,11 @@ const teacherSchema = yup.object().shape({
   address: yup.string().required("required"),
 });
 
-const AddTeacher = () => {
+const AddTeacher = ({ setSelectedLink, link }) => {
+  useEffect(() => {
+    setSelectedLink(link);
+  });
+
   const isNonMobile = useMediaQuery("(min-width:600px)");
 
   const handleFormSubmit = (formValues, { resetForm }) => {

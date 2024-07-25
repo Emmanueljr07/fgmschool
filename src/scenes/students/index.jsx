@@ -5,12 +5,15 @@ import { mockDataContacts } from "../../data/mockData";
 import Header from "../../Components/Header";
 import { useTheme } from "@mui/material";
 import StudentActions from "./StudentActions";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { grey } from "@mui/material/colors";
 
-const Students = () => {
+const Students = ({ setSelectedLink, link }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+  useEffect(() => {
+    setSelectedLink(link);
+  });
 
   const [pageSize, setPageSize] = useState(20);
   const [rowId, setRowId] = useState(null);

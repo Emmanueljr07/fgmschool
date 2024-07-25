@@ -9,10 +9,14 @@ import SubjectIcon from "@mui/icons-material/Subject";
 import StatBox from "../../Components/StatBox";
 import { Quiz } from "@mui/icons-material";
 import GroupsIcon from "@mui/icons-material/Groups";
+import { useEffect } from "react";
 
-const Dashboard = () => {
+const Dashboard = ({ setSelectedLink, link }) => {
   // const theme = useTheme();
   // const colors = tokens(theme.palette.mode);
+  useEffect(() => {
+    setSelectedLink(link);
+  });
 
   return (
     <Box m="20px" width="100%">

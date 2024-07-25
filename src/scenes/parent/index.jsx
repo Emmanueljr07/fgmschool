@@ -5,10 +5,15 @@ import { mockDataInvoices } from "../../data/mockData";
 import Header from "../../Components/Header";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
+import { useEffect } from "react";
 
-const Parents = () => {
+const Parents = ({ setSelectedLink, link }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+
+  useEffect(() => {
+    setSelectedLink(link);
+  });
 
   const onEditButtonClick = (e, row) => {
     e.stopPropagation();

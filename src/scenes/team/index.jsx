@@ -7,10 +7,15 @@ import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import { useValue } from "../../context/ContextProvider";
 import AddMember from "./AddMember";
 import TeamActions from "./TeamActions";
+import { useEffect } from "react";
 
-const Team = () => {
+const Team = ({ setSelectedLink, link }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+
+  useEffect(() => {
+    setSelectedLink(link);
+  });
 
   const {
     // state: {currentUser},
