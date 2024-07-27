@@ -4,6 +4,7 @@ import LandingPage from "./LandingPage";
 import Login from "./Login";
 import AdminHomePage from "./scenes/AdminHomePage";
 import TeacherDashboard from "./teacherScenes/dashboard/TeacherDashboard";
+import TeacherLogin from "./Components/TeacherLogin/TeacherLogin.jsx";
 
 const AllRoutes = () => {
   return (
@@ -17,6 +18,7 @@ const AllRoutes = () => {
           element={<TeacherDashboard />}
         />
         <Route exact path="/login" element={<Login />} />
+        <Route exact path="/teacherlogin" element={<TeacherLogin />} />
       </Routes>
     </>
   );

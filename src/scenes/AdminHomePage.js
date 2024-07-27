@@ -17,6 +17,7 @@ import { useState } from "react";
 // import { useValue } from "../context/ContextProvider";
 import UserMenu from "../Components/user/UserMenu";
 import MySidebar from "./global/Sidebar";
+import { Home } from "@mui/icons-material";
 
 const drawerWidth = 240;
 
@@ -74,15 +75,14 @@ const AdminHomePage = () => {
             >
               <MenuOutlinedIcon />
             </IconButton>
-
-            <Typography
-              variant="h6"
-              noWrap
-              component="div"
-              sx={{ ml: 6, flexGrow: 1 }}
-            >
-              Dashboard
-            </Typography>
+            <Box display="flex" sx={{ ml: 6, flexGrow: 1 }}>
+              <Tooltip title="return to dashboard">
+                <Home />
+              </Tooltip>
+              <Typography variant="h6" noWrap component="div" sx={{ ml: 2 }}>
+                Dashboard
+              </Typography>
+            </Box>
             <Box display="flex">
               <IconButton onClick={colorMode.toggleColorMode}>
                 {theme.palette.mode === "dark" ? (
