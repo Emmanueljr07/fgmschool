@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./TeacherLogin.css"; // Importing CSS file
-import { Email, Password } from "@mui/icons-material";
+import { Email, Lock } from "@mui/icons-material";
+import fgmlogo from "../../assets/FGM LOGO.jpg";
 
 const TeacherLogin = () => {
   const [loading, setLoading] = useState(false);
@@ -12,17 +13,32 @@ const TeacherLogin = () => {
   return (
     <div className="container">
       <div className="header">
+        <span>
+          <img src={fgmlogo} alt=""></img>
+        </span>
         <div className="text">Login</div>
         <div className="underline"></div>
       </div>
       <div className="inputs">
         <div className="input">
-          <img src={<Email />} alt="" />
+          <Email
+            sx={{
+              color: "black",
+              ml: 1,
+              mr: 1,
+            }}
+          />
           <input type="email" placeholder="Email" />
         </div>
 
         <div className="input">
-          <img src={<Password />} alt="" />
+          <Lock
+            sx={{
+              color: "black",
+              ml: 1,
+              mr: 1,
+            }}
+          />
           <input type="password" placeholder="Password" />
         </div>
       </div>

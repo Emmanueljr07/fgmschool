@@ -9,6 +9,8 @@ import {
 } from "@mui/material";
 import { Send, Visibility, VisibilityOff } from "@mui/icons-material";
 import { Form, Formik } from "formik";
+import fgmlogo from "./assets/FGM LOGO.jpg";
+import { red } from "@mui/material/colors";
 
 const initialValues = {
   email: "",
@@ -21,6 +23,8 @@ const Login = () => {
 
     resetForm();
   };
+
+  const cred = red[500];
 
   const [showPassword, setShowPassword] = React.useState(false);
 
@@ -48,24 +52,37 @@ const Login = () => {
         sx={{
           alignItems: "center",
           margin: "auto",
-          mt: "50px",
+          mt: "70px",
           justifyContent: "center",
           display: "flex",
-          width: "350px",
-          background: "skyblue",
+          width: 400,
+          backgroundColor: cred,
           flexDirection: "column",
           borderRadius: "5px",
           gap: "9px",
         }}
       >
+        <Box
+          component="img"
+          sx={{
+            m: 2,
+            height: 100,
+            width: 100,
+            maxHeight: { xs: 100, md: 130 },
+            maxWidth: { xs: 100, md: 140 },
+          }}
+          src={fgmlogo}
+          alt=""
+        />
         <Typography
           variant="h4"
           align="center"
           sx={{
-            mt: "20px",
+            mt: "5px",
             width: "100%",
             alignItems: "center",
             color: "whitesmoke",
+            fontFamily: "revert",
           }}
         >
           Login
@@ -85,7 +102,7 @@ const Login = () => {
               >
                 <TextField
                   autoFocus
-                  variant="standard"
+                  variant="outlined"
                   type="email"
                   label="Email"
                   fullWidth
@@ -99,7 +116,7 @@ const Login = () => {
 
                 <TextField
                   fullWidth
-                  variant="standard"
+                  variant="outlined"
                   type={showPassword ? "text" : "password"}
                   label="Password"
                   onBlur={props.handleBlur}
@@ -113,6 +130,7 @@ const Login = () => {
                     endAdornment: (
                       <InputAdornment position="end">
                         <IconButton
+                          sx={{ color: "whitesmoke" }}
                           onClick={handleClick}
                           onMouseDown={handleMouseDown}
                         >
@@ -127,9 +145,19 @@ const Login = () => {
                 display="flex"
                 justifyContent="end"
                 mt="20px"
-                sx={{ mt: "30px", mr: "30px", mb: "20px" }}
+                sx={{
+                  mt: "30px",
+                  mr: "30px",
+                  mb: "20px",
+                  ml: 25,
+                }}
               >
-                <Button type="submit" variant="contained" endIcon={<Send />}>
+                <Button
+                  sx={{ p: 1, pr: 3, backgroundColor: "black" }}
+                  type="submit"
+                  variant="contained"
+                  endIcon={<Send />}
+                >
                   Login
                 </Button>
               </Box>
@@ -137,7 +165,14 @@ const Login = () => {
           )}
         </Formik>
         <Box>
-          <Button>Forgot Password?</Button>
+          <Button
+            sx={{
+              color: "whitesmoke",
+              mr: 20,
+            }}
+          >
+            Forgot Password?
+          </Button>
         </Box>
       </Box>
     </Box>

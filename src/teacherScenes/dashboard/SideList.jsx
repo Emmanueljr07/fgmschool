@@ -111,7 +111,7 @@ const SideList = ({ open, setOpen }) => {
   const navigate = useNavigate();
   const handleLogout = () => {
     dispatch({ type: "UPDATE_USER", payload: null });
-    navigate("/login");
+    navigate("/teacherlogin");
   };
 
   return (
