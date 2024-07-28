@@ -8,6 +8,13 @@ const initialState = {
   loading: false,
   alert: { open: false, severity: "info", message: "" },
   viewStudent: null,
+  users: [],
+  students: [],
+  teachers: [],
+  classes: [],
+  subjects: [],
+  // studentsInClass: [],
+  // studentsInSubject: [],
 };
 
 const Context = createContext(initialState);

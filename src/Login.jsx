@@ -106,12 +106,40 @@ const Login = () => {
                   type="email"
                   label="Email"
                   fullWidth
+                  focused={{}}
                   onBlur={props.handleBlur}
                   onChange={props.handleChange}
                   value={props.values.email}
                   name="email"
                   required
-                  sx={{}}
+                  // color="primary"
+                  sx={{
+                    "& .MuiOutlinedInput-root": {
+                      color: "#000",
+                      fontFamily: "sans-serif",
+                      fontWeight: "bold",
+
+                      "& .MuiOutlinedInput-notchedOutline": {
+                        border: " 1px solid white",
+                      },
+                      "& .Mui-focused": {
+                        "& .MuiOutlinedInput-notchedOutline": {
+                          border: "5px solid white",
+                        },
+                      },
+                      "&:hover:not(.Mui-focused)": {
+                        "& .MuiOutlinedInput-notchedOutline": {
+                          borderColor: "#ccc",
+                        },
+                      },
+                    },
+                    "& .MuiInputLabel-outlined": {
+                      color: "black",
+                      "&.Mui-focused": {
+                        color: "black",
+                      },
+                    },
+                  }}
                 />
 
                 <TextField
@@ -125,7 +153,33 @@ const Login = () => {
                   name="password"
                   inputProps={{ minLength: 5 }}
                   required
-                  sx={{}}
+                  sx={{
+                    "& .MuiOutlinedInput-root": {
+                      color: "#000",
+                      fontFamily: "sans-serif",
+                      fontWeight: "bold",
+
+                      "& .MuiOutlinedInput-notchedOutline": {
+                        border: " 1px solid white",
+                      },
+                      "& .Mui-focused": {
+                        "& .MuiOutlinedInput-notchedOutline": {
+                          border: "5px solid primary",
+                        },
+                      },
+                      "&:hover:not(.Mui-focused)": {
+                        "& .MuiOutlinedInput-notchedOutline": {
+                          borderColor: "#ccc",
+                        },
+                      },
+                    },
+                    "& .MuiInputLabel-outlined": {
+                      color: "black",
+                      "&.Mui-focused": {
+                        color: "black",
+                      },
+                    },
+                  }}
                   InputProps={{
                     endAdornment: (
                       <InputAdornment position="end">

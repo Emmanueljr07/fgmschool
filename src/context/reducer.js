@@ -40,6 +40,16 @@ const reducer = (state, action) => {
         ...state,
         viewStudent: action.payload,
       };
+    case "UPDATE_USERS":
+      return { ...state, users: action.payload };
+    case "UPDATE_STUDENTS":
+      return { ...state, students: action.payload };
+    case "UPDATE_TEACHERS":
+      return { ...state, teachers: action.payload };
+    case "UPDATE_CLASSES":
+      return { ...state, classes: action.payload };
+    case "UPDATE_SUBJECTS":
+      return { ...state, subjects: action.payload };
 
     default:
       throw new Error("No matched action!");
