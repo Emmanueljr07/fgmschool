@@ -11,6 +11,8 @@ import { Send, Visibility, VisibilityOff } from "@mui/icons-material";
 import { Form, Formik } from "formik";
 import fgmlogo from "./assets/FGM LOGO.jpg";
 import { red } from "@mui/material/colors";
+import { login } from "./actions/user";
+import { useValue } from "./context/ContextProvider";
 
 const initialValues = {
   email: "",
@@ -18,10 +20,15 @@ const initialValues = {
 };
 
 const Login = () => {
+  const { dispatch } = useValue();
   const handleFormSubmit = (formValues, { resetForm }) => {
     console.log(formValues);
-
+    const email = formValues.email;
+    const password = formValues.password;
+    // send login request if it is not registered and return
+    const done = login({ email, password }, dispatch);
     resetForm();
+    return done;
   };
 
   const cred = red[500];
