@@ -22,12 +22,11 @@ const initialValues = {
 const Login = () => {
   const { dispatch } = useValue();
   const handleFormSubmit = (formValues, { resetForm }) => {
-    console.log(formValues);
     const email = formValues.email;
     const password = formValues.password;
     // send login request if it is not registered and return
     const done = login({ email, password }, dispatch);
-    resetForm();
+    // resetForm();
     return done;
   };
 
@@ -124,7 +123,6 @@ const Login = () => {
                     "& .MuiOutlinedInput-root": {
                       color: "#000",
                       fontFamily: "sans-serif",
-                      fontWeight: "bold",
 
                       "& .MuiOutlinedInput-notchedOutline": {
                         border: " 1px solid white",
@@ -164,7 +162,6 @@ const Login = () => {
                     "& .MuiOutlinedInput-root": {
                       color: "#000",
                       fontFamily: "sans-serif",
-                      fontWeight: "bold",
 
                       "& .MuiOutlinedInput-notchedOutline": {
                         border: " 1px solid white",

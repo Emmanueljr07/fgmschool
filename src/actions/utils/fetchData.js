@@ -4,7 +4,7 @@ const fetchData = async (
 ) => {
   const headers = token
     ? { "Content-Type": "application/json", authorization: `Bearer ${token}` }
-    : { "Content-Type": "application/json" };
+    : { "Content-Type": "application/json", Accept: "application/json" };
   body = body ? { body: JSON.stringify(body) } : {};
   try {
     const response = await fetch(url, { method, headers, ...body });
@@ -14,7 +14,7 @@ const fetchData = async (
         dispatch({ type: "UPDATE_USER", payload: null });
       throw new Error(data.message);
     }
-    return data.result;
+    return data;
   } catch (error) {
     dispatch({
       type: "UPDATE_ALERT",
