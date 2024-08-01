@@ -28,6 +28,9 @@ const reducer = (state, action) => {
         alert: action.payload,
       };
 
+    case "UPDATE_PROFILE":
+      return { ...state, profile: action.payload };
+
     case "UPDATE_USER":
       localStorage.setItem("currentUser", JSON.stringify(action.payload));
       return {

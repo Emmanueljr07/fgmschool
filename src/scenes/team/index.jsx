@@ -7,7 +7,7 @@ import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import { useValue } from "../../context/ContextProvider";
 import AddMember from "./AddMember";
 import TeamActions from "./TeamActions";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const Team = ({ setSelectedLink, link }) => {
   const theme = useTheme();
@@ -21,6 +21,8 @@ const Team = ({ setSelectedLink, link }) => {
     // state: {currentUser},
     dispatch,
   } = useValue();
+
+  const [users, setUsers] = useState(mockDataTeam);
 
   const columns = [
     { field: "id", headerName: "ID" },
@@ -118,7 +120,7 @@ const Team = ({ setSelectedLink, link }) => {
             },
           }}
         >
-          <DataGrid rows={mockDataTeam} columns={columns} />
+          <DataGrid rows={users} columns={columns} />
         </Box>
       </Box>
     </>

@@ -9,6 +9,7 @@ import {
   IconButton,
   TextField,
   InputAdornment,
+  MenuItem,
 } from "@mui/material";
 import React from "react";
 import { Form, Formik } from "formik";
@@ -155,6 +156,7 @@ const AddMember = () => {
               />
               <TextField
                 autoFocus
+                select
                 margin="normal"
                 variant="standard"
                 type="text"
@@ -166,7 +168,11 @@ const AddMember = () => {
                 name="role"
                 required
                 sx={{}}
-              />
+              >
+                <MenuItem value="admin">admin</MenuItem>
+                <MenuItem value="editor">editor</MenuItem>
+                <MenuItem value="viewer">viewer</MenuItem>
+              </TextField>
             </DialogContent>
             <DialogActions>
               <Button type="submit" variant="contained" endIcon={<Send />}>

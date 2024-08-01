@@ -12,12 +12,14 @@ import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
 import NotificationsOutlinedIcon from "@mui/icons-material/NotificationsOutlined";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 // import { useContext,} from "react";
-// import { useValue } from "../context/ContextProvider";
+import { useValue } from "../context/ContextProvider";
 import UserMenu from "../Components/user/UserMenu";
 import MySidebar from "./global/Sidebar";
 import { Home } from "@mui/icons-material";
+// import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 
 const drawerWidth = 240;
 
@@ -40,6 +42,7 @@ const AppBar = styled(MuiAppBar, {
 }));
 
 const AdminHomePage = () => {
+  const navigate = useNavigate();
   const [theme, colorMode] = useMode();
 
   // const colors = tokens(theme.palette.mode);
@@ -49,9 +52,21 @@ const AdminHomePage = () => {
     setOpen(!open);
   };
 
-  // const {
-  //   state: { currentUser },
-  // } = useValue();
+  const {
+    state: { currentUser },
+  } = useValue();
+
+  useEffect(() => {
+    if (
+      !currentUser?.role === "admin" ||
+      !currentUser?.role === "editor" ||
+      !currentUser?.role === "viewer"
+    ) {
+      // window.location.href = "/login";
+      // <Navigate to="/login" />;
+      navigate("/login");
+    }
+  }, [currentUser, navigate]);
 
   const [anchorUserMenu, setAnchorUserMenu] = useState(null);
 
@@ -77,9 +92,16 @@ const AdminHomePage = () => {
             </IconButton>
             <Box display="flex" sx={{ ml: 6, flexGrow: 1 }}>
               <Tooltip title="return to dashboard">
-                <Home />
+                <IconButton onClick={() => navigate("/")}>
+                  <Home />
+                </IconButton>
               </Tooltip>
-              <Typography variant="h6" noWrap component="div" sx={{ ml: 2 }}>
+              <Typography
+                variant="h6"
+                noWrap
+                component="div"
+                sx={{ ml: 2, alignContent: "center" }}
+              >
                 Dashboard
               </Typography>
             </Box>

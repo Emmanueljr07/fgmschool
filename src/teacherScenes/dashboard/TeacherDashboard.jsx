@@ -7,10 +7,12 @@ import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import SideList from "./SideList";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Tooltip } from "@mui/material";
 import { Brightness4, Brightness7, Home } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
+import { useValue } from "../../context/ContextProvider";
+import { Navigate } from "react-router-dom";
 
 const drawerWidth = 240;
 
@@ -33,6 +35,18 @@ const AppBar = styled(MuiAppBar, {
 }));
 
 export default function TeacherDashboard() {
+  const {
+    state: { currentUser },
+  } = useValue();
+
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (!currentUser?.role === "teacher") {
+      // window.location.href = "/login";
+      <Navigate to="/teacherlogin" />;
+      navigate("/teacherlogin");
+    }
+  }, [currentUser, navigate]);
   // const theme = useTheme();
   const [open, setOpen] = useState(false);
   const [dark, setDark] = useState(true);
@@ -50,8 +64,6 @@ export default function TeacherDashboard() {
   const handleDrawerOpen = () => {
     setOpen(true);
   };
-
-  const navigate = useNavigate();
   return (
     <ThemeProvider theme={darkTheme}>
       <Box sx={{ display: "flex" }}>

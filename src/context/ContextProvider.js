@@ -13,6 +13,7 @@ const initialState = {
   teachers: [],
   classes: [],
   subjects: [],
+  profile: { open: false },
   // studentsInClass: [],
   // studentsInSubject: [],
 };
