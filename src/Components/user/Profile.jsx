@@ -16,16 +16,16 @@ import { Send } from "@mui/icons-material";
 import { useValue } from "../../context/ContextProvider";
 import { updateProfile } from "../../actions/user";
 
-const initialValues = {
-  name: "",
-  email: "",
-};
-
 const Profile = () => {
   const {
     state: { profile, currentUser },
     dispatch,
   } = useValue();
+
+  const initialValues = {
+    name: currentUser?.name,
+    email: currentUser?.email,
+  };
 
   const handleClose = () => {
     dispatch({ type: "UPDATE_PROFILE", payload: { ...profile, open: false } });
@@ -83,7 +83,6 @@ const Profile = () => {
                   value={props.values.name}
                   name="name"
                   required
-                  defaultValue={currentUser?.name}
                 />
                 <TextField
                   margin="normal"
@@ -95,7 +94,6 @@ const Profile = () => {
                   value={props.values.email}
                   name="email"
                   required
-                  defaultValue={currentUser?.email}
                 />
               </DialogContent>
               <DialogActions>

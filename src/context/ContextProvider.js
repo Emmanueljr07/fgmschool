@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useReducer } from "react";
 import reducer from "./reducer";
+import { jwtDecode } from "jwt-decode";
 
 const initialState = {
   currentUser: null,
@@ -29,7 +30,17 @@ const ContextProvider = ({ children }) => {
   useEffect(() => {
     const currentUser = JSON.parse(localStorage.getItem("currentUser"));
     if (currentUser) {
-      dispatch({ type: "UPDATE_USER", payload: currentUser });
+      const token = currentUser.token;
+      const decodedToken = jwtDecode(token);
+      console.log(decodedToken.exp, "token expired");
+      if (decodedToken.exp * 1000 < new Date().getTime()) {
+        dispatch({ type: "UPDATE_USER", payload: null });
+        console.log(decodedToken.exp, "token expired");
+        localStorage.removeItem("currentUser");
+      } else {
+        console.log(decodedToken.exp, "token expired");
+        dispatch({ type: "UPDATE_USER", payload: currentUser });
+      }
     }
   }, []);
   return (

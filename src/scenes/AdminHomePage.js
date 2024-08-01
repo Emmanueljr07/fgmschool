@@ -62,8 +62,6 @@ const AdminHomePage = () => {
       !currentUser?.role === "editor" ||
       !currentUser?.role === "viewer"
     ) {
-      // window.location.href = "/login";
-      // <Navigate to="/login" />;
       navigate("/login");
     }
   }, [currentUser, navigate]);
@@ -81,12 +79,6 @@ const AdminHomePage = () => {
               aria-label="open drawer"
               onClick={handleDrawerOpen}
               edge="start"
-              sx={
-                {
-                  // marginRight: 5,
-                  // ...(!open && { display: "none" }),
-                }
-              }
             >
               <MenuOutlinedIcon />
             </IconButton>
