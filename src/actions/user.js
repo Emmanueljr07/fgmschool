@@ -80,3 +80,14 @@ export const updateProfile = async (currentUser, updatedFields, dispatch) => {
 
   dispatch({ type: "END_LOADING" });
 };
+
+export const getUsers = async (dispatch, currentUser) => {
+  const result = await fetchData(
+    { url: url, method: "GET", token: currentUser.token },
+    dispatch
+  );
+  if (result) {
+    console.log("result", result);
+    dispatch({ type: "UPDATE_USERS", payload: result });
+  }
+};

@@ -7,68 +7,70 @@ import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import { useValue } from "../../context/ContextProvider";
 import AddMember from "./AddMember";
 import TeamActions from "./TeamActions";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo } from "react";
+import { getUsers } from "../../actions/user";
 
 const Team = ({ setSelectedLink, link }) => {
+  const {
+    state: { currentUser, users },
+    dispatch,
+  } = useValue();
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
   useEffect(() => {
     setSelectedLink(link);
+    if (users.length === 0) getUsers(dispatch, currentUser);
   });
 
-  const {
-    // state: {currentUser},
-    dispatch,
-  } = useValue();
-
-  const [users, setUsers] = useState(mockDataTeam);
-
-  const columns = [
-    { field: "id", headerName: "ID" },
-    {
-      field: "name",
-      headerName: "Name",
-      flex: 1,
-      minWidth: 200,
-      cellClassName: "name-column--cell",
-      editable: true,
-    },
-    {
-      field: "age",
-      headerName: "Age",
-      type: "number",
-      headerAlign: "left",
-      align: "left",
-      minWidth: 100,
-      editable: true,
-    },
-    {
-      field: "phone",
-      headerName: "Phone Number",
-      flex: 1,
-      minWidth: 150,
-      editable: true,
-    },
-    { field: "email", headerName: "Email", flex: 1.5, minWidth: 150 },
-    {
-      field: "access",
-      headerName: "Access Level",
-      flex: 1.4,
-      minWidth: 150,
-      type: "singleSelect",
-      valueOptions: ["admin", "editor", "viewer"],
-      editable: true,
-    },
-    {
-      field: "actions",
-      headerName: "",
-      width: 120,
-      sortable: false,
-      disableColumnMenu: true,
-      renderCell: (params) => <TeamActions {...{ params }} />,
-    },
-  ];
+  const columns = useMemo(
+    () => [
+      { field: "id", headerName: "ID" },
+      {
+        field: "name",
+        headerName: "Name",
+        flex: 1,
+        minWidth: 200,
+        cellClassName: "name-column--cell",
+        editable: true,
+      },
+      {
+        field: "age",
+        headerName: "Age",
+        type: "number",
+        headerAlign: "left",
+        align: "left",
+        minWidth: 100,
+        editable: true,
+      },
+      {
+        field: "phone",
+        headerName: "Phone Number",
+        flex: 1,
+        minWidth: 150,
+        editable: true,
+      },
+      { field: "email", headerName: "Email", flex: 1.5, minWidth: 150 },
+      {
+        field: "access",
+        headerName: "Access Level",
+        flex: 1.4,
+        minWidth: 150,
+        type: "singleSelect",
+        valueOptions: ["admin", "editor", "viewer"],
+        editable: true,
+      },
+      {
+        field: "actions",
+        headerName: "",
+        width: 120,
+        sortable: false,
+        disableColumnMenu: true,
+        renderCell: (params) => <TeamActions {...{ params }} />,
+      },
+    ],
+    []
+  );
 
   return (
     <>
@@ -120,7 +122,7 @@ const Team = ({ setSelectedLink, link }) => {
             },
           }}
         >
-          <DataGrid rows={users} columns={columns} />
+          <DataGrid rows={mockDataTeam} columns={columns} />
         </Box>
       </Box>
     </>

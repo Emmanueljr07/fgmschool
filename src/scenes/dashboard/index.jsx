@@ -10,12 +10,21 @@ import StatBox from "../../Components/StatBox";
 import { Quiz } from "@mui/icons-material";
 import GroupsIcon from "@mui/icons-material/Groups";
 import { useEffect } from "react";
+import { useValue } from "../../context/ContextProvider";
+import { getUsers } from "../../actions/user";
 
 const Dashboard = ({ setSelectedLink, link }) => {
   // const theme = useTheme();
   // const colors = tokens(theme.palette.mode);
+  const {
+    state: { currentUser, users },
+    dispatch,
+  } = useValue();
+
   useEffect(() => {
     setSelectedLink(link);
+    console.log(users.result.length);
+    if (users.result.length === 0) getUsers(dispatch, currentUser);
   });
 
   return (
@@ -40,7 +49,7 @@ const Dashboard = ({ setSelectedLink, link }) => {
           icon={
             <GroupsIcon sx={{ height: 100, width: 100, opacity: 0.3, mr: 1 }} />
           }
-          amount={10}
+          amount={users.result.length}
         />
         <StatBox
           title="Total Students"

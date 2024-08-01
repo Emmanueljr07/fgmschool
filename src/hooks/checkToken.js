@@ -1,20 +1,20 @@
-import { useEffect } from "react";
-import useValue from "../context/ContextProvider";
-import { jwtDecode } from "jwt-decode";
+// import { useEffect } from "react";
+// import useValue from "../context/ContextProvider";
+// import { jwtDecode } from "jwt-decode";
 
-const CheckToken = () => {
-  const {
-    state: { currentUser },
-    dispatch,
-  } = useValue();
+// const CheckToken = () => {
+//   const {
+//     state: { currentUser },
+//     dispatch,
+//   } = useValue();
 
-  useEffect(() => {
-    if (currentUser) {
-      const decodedToken = jwtDecode(currentUser.token);
-      if (decodedToken.exp * 1000 < new Date().getTime())
-        dispatch({ type: "UPDATE_USER", payload: null });
-    }
-  }, [currentUser, dispatch]);
-};
+//   useEffect(() => {
+//     if (currentUser) {
+//       const decodedToken = jwtDecode(currentUser.token);
+//       if (decodedToken.exp * 1000 < new Date().getTime())
+//         dispatch({ type: "UPDATE_USER", payload: null });
+//     }
+//   }, [currentUser, dispatch]);
+// };
 
-export default CheckToken;
+// export default CheckToken;
