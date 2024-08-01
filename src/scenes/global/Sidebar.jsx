@@ -71,7 +71,7 @@ const MySidebar = ({ open, setOpen }) => {
   return (
     <>
       <Box
-        mt={8}
+        mt={6}
         sx={{
           display: "flex",
           "& .ps-sidebar-container": {
@@ -99,7 +99,7 @@ const MySidebar = ({ open, setOpen }) => {
             {/* {LOGO AND MENU ICON} */}
 
             {/* {MENU ITEMS} */}
-            <Box paddingLeft={open ? undefined : "10px"}>
+            <Box pt={2} paddingLeft={open ? undefined : "10px"}>
               <Item
                 title="Dashboard"
                 to="dashboard"

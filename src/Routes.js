@@ -1,44 +1,72 @@
-import React, { useEffect } from "react";
-import { Routes, Route } from "react-router-dom";
+import React from "react";
+import { Routes, Route, Navigate } from "react-router-dom";
 import LandingPage from "./LandingPage";
 import Login from "./Login";
 import AdminHomePage from "./scenes/AdminHomePage";
 import TeacherDashboard from "./teacherScenes/dashboard/TeacherDashboard";
 import TeacherLogin from "./Components/TeacherLogin/TeacherLogin.jsx";
 import { useValue } from "./context/ContextProvider.js";
-import { useNavigate } from "react-router";
 
 const AllRoutes = () => {
-  const navigate = useNavigate();
   const {
     state: { currentUser },
   } = useValue();
 
-  useEffect(() => {
-    if (currentUser?.role === "admin" || "editor" || "viewer") {
-      navigate("admin/dashboard");
-    } else if (currentUser?.role === "teacher") {
-      navigate("teacher/dashboard");
-    } else if (currentUser === null) {
-      navigate("/");
-    } else {
-      navigate("/");
-    }
-  });
-
   return (
     <>
       <Routes>
-        <Route exact path="*" Component={LandingPage} />
+        <Route
+          exact
+          path="*"
+          element={
+            currentUser?.role === "admin" ||
+            currentUser?.role === "editor" ||
+            currentUser?.role === "viewer" ? (
+              <Navigate to="admin/" />
+            ) : currentUser?.role === "teacher" ? (
+              <Navigate to="teacher/dashboard" />
+            ) : (
+              <LandingPage />
+            )
+          }
+        />
 
-        <Route exact path="admin/*" element={<AdminHomePage />} />
+        <Route
+          exact
+          path="admin/*"
+          element={
+            currentUser?.role === "admin" ||
+            currentUser?.role === "editor" ||
+            currentUser?.role === "viewer" ? (
+              <AdminHomePage />
+            ) : (
+              <Navigate replace to="/" />
+            )
+          }
+        />
         <Route
           exact
           path="teacher/dashboard/*"
-          element={<TeacherDashboard />}
+          element={
+            currentUser?.role === "teacher" ? (
+              <TeacherDashboard />
+            ) : (
+              <Navigate to="/" />
+            )
+          }
         />
-        <Route exact path="/login" element={<Login />} />
-        <Route exact path="/teacherlogin" element={<TeacherLogin />} />
+        <Route
+          exact
+          path="/login"
+          element={currentUser === null ? <Login /> : <Navigate to="/" />}
+        />
+        <Route
+          exact
+          path="/teacherlogin"
+          element={
+            currentUser === null ? <TeacherLogin /> : <Navigate to="/" />
+          }
+        />
       </Routes>
     </>
   );
