@@ -14,7 +14,7 @@ const fetchData = async (
         dispatch({ type: "UPDATE_USER", payload: null });
       throw new Error(data.message);
     }
-    return data;
+    return data.result;
   } catch (error) {
     dispatch({
       type: "UPDATE_ALERT",

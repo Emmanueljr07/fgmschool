@@ -23,8 +23,8 @@ const Dashboard = ({ setSelectedLink, link }) => {
 
   useEffect(() => {
     setSelectedLink(link);
-    console.log(users.result.length);
-    if (users.result.length === 0) getUsers(dispatch, currentUser);
+    // console.log(users.length);
+    if (users.length === 0) getUsers(dispatch, currentUser);
   });
 
   return (
@@ -49,7 +49,7 @@ const Dashboard = ({ setSelectedLink, link }) => {
           icon={
             <GroupsIcon sx={{ height: 100, width: 100, opacity: 0.3, mr: 1 }} />
           }
-          amount={users.result.length}
+          amount={users.length}
         />
         <StatBox
           title="Total Students"

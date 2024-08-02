@@ -83,11 +83,16 @@ export const updateProfile = async (currentUser, updatedFields, dispatch) => {
 
 export const getUsers = async (dispatch, currentUser) => {
   const result = await fetchData(
-    { url: url, method: "GET", token: currentUser.token },
+    { url, method: "GET", token: currentUser.token },
     dispatch
   );
   if (result) {
-    console.log("result", result);
     dispatch({ type: "UPDATE_USERS", payload: result });
   }
 };
+
+// export const logout = (dispatch) => {
+//   dispatch({ type: "UPDATE_USER", payload: null });
+//   // dispatch({ type: 'RESET_ROOM' });
+//   dispatch({ type: "UPDATE_USERS", payload: [] });
+// };
