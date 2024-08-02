@@ -1,13 +1,12 @@
 import { Box, useTheme, Button } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import { tokens } from "../../theme";
-import { mockDataTeam } from "../../data/mockData";
 import Header from "../../Components/Header";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import { useValue } from "../../context/ContextProvider";
 import AddMember from "./AddMember";
 import TeamActions from "./TeamActions";
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { getUsers } from "../../actions/user";
 
 const Team = ({ setSelectedLink, link }) => {
@@ -21,18 +20,21 @@ const Team = ({ setSelectedLink, link }) => {
   useEffect(() => {
     setSelectedLink(link);
     if (users.length === 0) getUsers(dispatch, currentUser);
-  });
+  }, [currentUser, dispatch, setSelectedLink, users, link]);
+
+  const [pageSize, setPageSize] = useState(5);
+  const [rowId, setRowId] = useState(null);
 
   const columns = useMemo(
     () => [
-      { field: "id", headerName: "ID" },
+      { field: "_id", headerName: "ID", width: 120 },
       {
         field: "name",
         headerName: "Name",
         flex: 1,
         minWidth: 200,
         cellClassName: "name-column--cell",
-        editable: true,
+        // editable: true,
       },
       {
         field: "age",
@@ -41,24 +43,24 @@ const Team = ({ setSelectedLink, link }) => {
         headerAlign: "left",
         align: "left",
         minWidth: 100,
-        editable: true,
+        // editable: true,
       },
       {
-        field: "phone",
+        field: "contact",
         headerName: "Phone Number",
         flex: 1,
         minWidth: 150,
-        editable: true,
+        // editable: true,
       },
       { field: "email", headerName: "Email", flex: 1.5, minWidth: 150 },
       {
-        field: "access",
+        field: "role",
         headerName: "Access Level",
         flex: 1.4,
         minWidth: 150,
         type: "singleSelect",
         valueOptions: ["admin", "editor", "viewer"],
-        editable: true,
+        editable: currentUser?.role === "admin",
       },
       {
         field: "actions",
@@ -66,10 +68,12 @@ const Team = ({ setSelectedLink, link }) => {
         width: 120,
         sortable: false,
         disableColumnMenu: true,
-        renderCell: (params) => <TeamActions {...{ params }} />,
+        renderCell: (params) => (
+          <TeamActions {...{ params, rowId, setRowId }} />
+        ),
       },
     ],
-    []
+    [rowId, currentUser?.role]
   );
 
   return (
@@ -122,7 +126,14 @@ const Team = ({ setSelectedLink, link }) => {
             },
           }}
         >
-          <DataGrid rows={mockDataTeam} columns={columns} />
+          <DataGrid
+            rows={users}
+            columns={columns}
+            getRowId={(row) => row._id}
+            pageSize={pageSize}
+            onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}
+            onCellEditStart={(params) => setRowId(params.id)}
+          />
         </Box>
       </Box>
     </>

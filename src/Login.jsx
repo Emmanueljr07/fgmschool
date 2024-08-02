@@ -24,7 +24,7 @@ const Login = () => {
   const handleFormSubmit = (formValues, { resetForm }) => {
     const email = formValues.email;
     const password = formValues.password;
-    // send login request if it is not registered and return
+    // send login request
     const done = login({ email, password }, dispatch);
     // resetForm();
     return done;

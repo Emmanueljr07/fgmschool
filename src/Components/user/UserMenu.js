@@ -3,6 +3,7 @@ import { ListItemIcon, Menu, MenuItem } from "@mui/material";
 import React from "react";
 import { useValue } from "../../context/ContextProvider";
 import Profile from "./Profile";
+import { logout } from "../../actions/user";
 
 const UserMenu = ({ anchorUserMenu, setAnchorUserMenu }) => {
   const { dispatch } = useValue();
@@ -12,11 +13,7 @@ const UserMenu = ({ anchorUserMenu, setAnchorUserMenu }) => {
   };
 
   const handleLogout = () => {
-    dispatch({ type: "UPDATE_USER", payload: null });
-    dispatch({
-      type: "UPDATE_ALERT",
-      payload: { open: true, severity: "error", message: "Logged out!" },
-    });
+    logout(dispatch);
     handleCloseUserMenu();
   };
 

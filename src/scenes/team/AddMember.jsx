@@ -15,6 +15,7 @@ import React from "react";
 import { Form, Formik } from "formik";
 import { Send, Visibility, VisibilityOff } from "@mui/icons-material";
 import { useValue } from "../../context/ContextProvider";
+import { register } from "../../actions/user";
 
 const initialValues = {
   name: "",
@@ -27,7 +28,7 @@ const initialValues = {
 
 const AddMember = () => {
   const {
-    state: { openDialog },
+    state: { currentUser, openDialog },
     dispatch,
   } = useValue();
 
@@ -36,9 +37,18 @@ const AddMember = () => {
   };
 
   const handleSubmit = (formValues, { resetForm }) => {
-    console.log(formValues);
-
-    resetForm();
+    const name = formValues.name;
+    const age = formValues.age;
+    const contact = formValues.contact;
+    const email = formValues.email;
+    const password = formValues.password;
+    const role = formValues.role;
+    //sending register request
+    register(
+      { name, age, contact, email, password, role },
+      currentUser,
+      dispatch
+    );
   };
 
   const [showPassword, setShowPassword] = React.useState(false);

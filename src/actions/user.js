@@ -2,11 +2,11 @@ import fetchData from "./utils/fetchData";
 
 const url = process.env.REACT_APP_SCHOOL_API_URL + "/user";
 
-export const register = async (user, dispatch) => {
+export const register = async (user, currentUser, dispatch) => {
   dispatch({ type: "START_LOADING" });
 
   const result = await fetchData(
-    { url: url + "/register", body: user },
+    { url: url + "/register", body: user, token: currentUser.token },
     dispatch
   );
   if (result) {
@@ -19,6 +19,7 @@ export const register = async (user, dispatch) => {
         message: "Your account has been created successfully",
       },
     });
+    dispatch({ type: "CLOSE_DIALOG" });
   }
 
   dispatch({ type: "END_LOADING" });
@@ -91,8 +92,12 @@ export const getUsers = async (dispatch, currentUser) => {
   }
 };
 
-// export const logout = (dispatch) => {
-//   dispatch({ type: "UPDATE_USER", payload: null });
-//   // dispatch({ type: 'RESET_ROOM' });
-//   dispatch({ type: "UPDATE_USERS", payload: [] });
-// };
+export const logout = (dispatch) => {
+  dispatch({ type: "UPDATE_USER", payload: null });
+  // dispatch({ type: 'RESET_ROOM' });
+  dispatch({ type: "UPDATE_USERS", payload: [] });
+  dispatch({
+    type: "UPDATE_ALERT",
+    payload: { open: true, severity: "error", message: "Logged out!" },
+  });
+};
