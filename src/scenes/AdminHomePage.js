@@ -56,15 +56,15 @@ const AdminHomePage = () => {
     state: { currentUser },
   } = useValue();
 
-  useEffect(() => {
-    if (
-      !currentUser?.role === "admin" ||
-      !currentUser?.role === "editor" ||
-      !currentUser?.role === "viewer"
-    ) {
-      navigate("/login");
-    }
-  }, [currentUser, navigate]);
+  // useEffect(() => {
+  //   if (
+  //     !currentUser?.role === "admin" ||
+  //     !currentUser?.role === "editor" ||
+  //     !currentUser?.role === "viewer"
+  //   ) {
+  //     navigate("/login");
+  //   }
+  // }, [currentUser, navigate]);
 
   const [anchorUserMenu, setAnchorUserMenu] = useState(null);
 

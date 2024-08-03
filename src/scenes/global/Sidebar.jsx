@@ -17,8 +17,8 @@ import Diversity2Icon from "@mui/icons-material/Diversity2";
 import ContactsOutlinedIcon from "@mui/icons-material/ContactsOutlined";
 import ReceiptOutlinedIcon from "@mui/icons-material/ReceiptOutlined";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
-import CalendarTodayOutlinedIcon from "@mui/icons-material/CalendarTodayOutlined";
-import HelpOutlinedIcon from "@mui/icons-material/HelpOutlined";
+// import CalendarTodayOutlinedIcon from "@mui/icons-material/CalendarTodayOutlined";
+// import HelpOutlinedIcon from "@mui/icons-material/HelpOutlined";
 // import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import SubjectIcon from "@mui/icons-material/Subject";
 import LibraryBooksIcon from "@mui/icons-material/LibraryBooks";
@@ -35,8 +35,8 @@ import Parents from "../parent";
 import AddParent from "../parent/AddParent";
 import Students from "../students";
 import AddStudent from "../students/AddStudent";
-import Calendar from "../calendar";
-import NoticeBoard from "../noticeboard";
+// import Calendar from "../calendar";
+// import NoticeBoard from "../noticeboard";
 import Class from "../class";
 import Staffs from "../staffs";
 import AddStaff from "../staffs/AddStaff";
@@ -229,7 +229,7 @@ const MySidebar = ({ open, setOpen }) => {
                 setSelected={setSelected}
                 selectedLink={selectedLink}
               />
-              <Item
+              {/* <Item
                 title="Calendar"
                 to="calendar"
                 icon={<CalendarTodayOutlinedIcon />}
@@ -244,7 +244,7 @@ const MySidebar = ({ open, setOpen }) => {
                 selected={selected}
                 setSelected={setSelected}
                 selectedLink={selectedLink}
-              />
+              /> */}
             </Box>
           </Menu>
         </Sidebar>
@@ -286,7 +286,7 @@ const MySidebar = ({ open, setOpen }) => {
             path="class"
             element={<Class {...{ setSelectedLink, link: "class" }} />}
           />
-          <Route
+          {/* <Route
             exact
             path="calendar"
             element={<Calendar {...{ setSelectedLink, link: "calendar" }} />}
@@ -295,7 +295,7 @@ const MySidebar = ({ open, setOpen }) => {
             exact
             path="notice"
             element={<NoticeBoard {...{ setSelectedLink, link: "notice" }} />}
-          />
+          /> */}
           <Route
             exact
             path="addstudent"

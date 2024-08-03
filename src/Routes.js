@@ -15,58 +15,16 @@ const AllRoutes = () => {
   return (
     <>
       <Routes>
-        <Route
-          exact
-          path="*"
-          element={
-            currentUser?.role === "admin" ||
-            currentUser?.role === "editor" ||
-            currentUser?.role === "viewer" ? (
-              <Navigate to="admin/" />
-            ) : currentUser?.role === "teacher" ? (
-              <Navigate to="teacher/dashboard" />
-            ) : (
-              <LandingPage />
-            )
-          }
-        />
+        <Route exact path="*" element={<LandingPage />} />
 
-        <Route
-          exact
-          path="admin/*"
-          element={
-            currentUser?.role === "admin" ||
-            currentUser?.role === "editor" ||
-            currentUser?.role === "viewer" ? (
-              <AdminHomePage />
-            ) : (
-              <Navigate replace to="/" />
-            )
-          }
-        />
+        <Route exact path="admin/*" element={<AdminHomePage />} />
         <Route
           exact
           path="teacher/dashboard/*"
-          element={
-            currentUser?.role === "teacher" ? (
-              <TeacherDashboard />
-            ) : (
-              <Navigate to="/" />
-            )
-          }
+          element={<TeacherDashboard />}
         />
-        <Route
-          exact
-          path="/login"
-          element={currentUser === null ? <Login /> : <Navigate to="/" />}
-        />
-        <Route
-          exact
-          path="/teacherlogin"
-          element={
-            currentUser === null ? <TeacherLogin /> : <Navigate to="/" />
-          }
-        />
+        <Route exact path="/login" element={<Login />} />
+        <Route exact path="/teacherlogin" element={<TeacherLogin />} />
       </Routes>
     </>
   );

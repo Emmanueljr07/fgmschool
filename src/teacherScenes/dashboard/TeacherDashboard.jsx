@@ -40,13 +40,13 @@ export default function TeacherDashboard() {
   } = useValue();
 
   const navigate = useNavigate();
-  useEffect(() => {
-    if (!currentUser?.role === "teacher") {
-      // window.location.href = "/login";
-      <Navigate to="/teacherlogin" />;
-      navigate("/teacherlogin");
-    }
-  }, [currentUser, navigate]);
+  // useEffect(() => {
+  //   if (!currentUser?.role === "teacher") {
+  //     // window.location.href = "/login";
+  //     <Navigate to="/teacherlogin" />;
+  //     navigate("/teacherlogin");
+  //   }
+  // }, [currentUser, navigate]);
   // const theme = useTheme();
   const [open, setOpen] = useState(false);
   const [dark, setDark] = useState(true);
