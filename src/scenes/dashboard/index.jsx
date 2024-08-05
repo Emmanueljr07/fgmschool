@@ -9,11 +9,16 @@ import SubjectIcon from "@mui/icons-material/Subject";
 import StatBox from "../../Components/StatBox";
 import { Quiz } from "@mui/icons-material";
 import GroupsIcon from "@mui/icons-material/Groups";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 // import { useValue } from "../../context/ContextProvider";
 // import { getUsers } from "../../actions/user";
 
+
+
+import { getStudents } from "../../api/database/student"
+
 const Dashboard = ({ setSelectedLink, link }) => {
+  const [ nStudent , setNStudent ] = useState(0) 
   // const theme = useTheme();
   // const colors = tokens(theme.palette.mode);
   // const {
@@ -23,9 +28,15 @@ const Dashboard = ({ setSelectedLink, link }) => {
 
   useEffect(() => {
     setSelectedLink(link);
+    totalStudent()
     // console.log(users.length);
     // if (users.length === 0) getUsers(dispatch, currentUser);
   });
+
+  const totalStudent = async() =>{
+    const res = await getStudents()
+    setNStudent(res.data ? res.data.length : null)
+  }
 
   return (
     <Box m="20px" width="100%">
@@ -57,7 +68,7 @@ const Dashboard = ({ setSelectedLink, link }) => {
           icon={
             <SchoolIcon sx={{ height: 100, width: 100, opacity: 0.3, mr: 1 }} />
           }
-          amount={200}
+          amount={nStudent}
         />
         <StatBox
           title="Total Teachers"
